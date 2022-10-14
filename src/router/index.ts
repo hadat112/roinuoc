@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import { MainLayout } from "../shared";
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: "",
     name: "layout",
@@ -9,10 +9,30 @@ const routes = [
     component: MainLayout,
     children: [
       {
-        path: "/:id?",
-        name: "chat",
-        component: () => import("@/pages/chat.vue"),
+        path: "",
+        name: "home",
+        component: () => import("@/pages/home.vue"),
       },
+      {
+        path: "/gioithieu",
+        name: "overview",
+        component: () => import("@/pages/overview.vue"),
+      },
+      {
+        path: '/sukien',
+        name: "event",
+        component: () => import("@/pages/event.vue"),
+      },
+      {
+        path: '/vodien',
+        name: "vo-dien",
+        component: () => import("@/pages/plays.vue"),
+      },
+      {
+        path: '/lichchieu',
+        name: "lich-chieu",
+        component: () => import("@/pages/schedule.vue"),
+      }
     ],
   },
 ];
