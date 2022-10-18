@@ -3,10 +3,19 @@ import App from "./App.vue";
 import "ant-design-vue/dist/antd.css";
 import './assets/global.css'
 import router from "./router";
-
 import { createPinia } from "pinia";
+import { marked } from 'marked';
+
+const markedMixin = {
+    methods: {
+         markedText: function (input: string) {
+            return marked(input);
+        },
+    },
+};
 
 const app = createApp(App);
+app.mixin(markedMixin)
 app.use(createPinia());
 app.use(router);
 app.mount("#app");

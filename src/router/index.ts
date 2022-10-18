@@ -1,11 +1,10 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw, RouteRecordRedirectOption } from "vue-router";
 import { MainLayout } from "../shared";
 
-const routes: RouteRecordRaw[] = [
+const routes= [
   {
     path: "",
     name: "layout",
-    meta: { layout: "default" },
     component: MainLayout,
     children: [
       {
@@ -15,8 +14,28 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: "/gioithieu",
-        name: "overview",
-        component: () => import("@/pages/overview.vue"),
+        children: [
+          {
+            path: "",
+            name: "overview",
+            component: () => import("@/pages/overview.vue"),
+          },
+          {
+            path: "lichsu",
+            name: "history",
+            component: () => import("@/pages/history.vue"),
+          },
+          {
+            path: "quytrinh",
+            name: "steps",
+            component: () => import("@/pages/steps.vue"),
+          },
+          {
+            path: "giatri",
+            name: "value",
+            component: () => import("@/pages/value.vue"),
+          }
+        ]
       },
       {
         path: '/sukien',

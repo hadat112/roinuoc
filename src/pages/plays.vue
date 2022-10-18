@@ -3,6 +3,7 @@ import { onMounted, ref, watch } from "vue";
    async function getPlayList() {
         const response = await fetch('http://localhost:3000/', {
             method: 'GET', 
+        
         });
 
         const data = await response.json();

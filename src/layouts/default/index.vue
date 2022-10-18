@@ -39,6 +39,7 @@ onMounted(() => {
   >
     <layout style="flex-direction: column">
       <layout-header
+        class="hover:!bg-bg-header"
         :class="{
           '!bg-bg-header !relative': route.path !== '/',
           '!bg-bg-header fixed': changeHeader,
@@ -66,5 +67,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   z-index: 100;
+  -webkit-transition: all 0.4s ease;
+   transition: all 0.8s ease;
 }
 </style>

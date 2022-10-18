@@ -4,16 +4,16 @@ import { Carousel } from "ant-design-vue";
 <template>
   <div class="home w-full">
     <Carousel>
-      <div class="">
+      <div>
         <img
-          class="w-full h-auto max-w-full max-h-full object-contain"
+          class="block w-[100%] h-[520px] min-h-[520px] max-w-full"
           src="https://sodulich.hanoi.gov.vn/storage/nh-cac-nghe-nhan-dieu-khien-con-roi-to-nuoc.jpg"
           alt=""
         />
       </div>
-      <div class="object-contain">
+      <div>
         <img
-          class="w-full h-auto"
+          class="block w-[100%] h-[520px] min-h-[520px] max-w-full"
           src="https://media.hanoitv.vn/thumb_x600x314/upload/2013/12/14/doc-dao-phuong-roi-co-te-tieu.jpg"
           alt=""
         />
@@ -31,7 +31,7 @@ import { Carousel } from "ant-design-vue";
 /* For demo */
 .home :deep(.slick-slide) {
   text-align: center;
-  height: 560px;
+  height: 520px;
   line-height: 160px;
   background: #364d79;
   overflow: hidden;
