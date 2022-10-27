@@ -49,7 +49,7 @@ onMounted(() => {
       >
         <Header></Header>
       </layout-header>
-      <layout-content style="display: flex; background: #fff">
+      <layout-content style="display: flex; background: #ECEFF1">
         <router-view />
       </layout-content>
       <layout-footer>

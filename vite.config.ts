@@ -9,6 +9,17 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.less'],
+  },
+  css: {
+    preprocessorOptions:{ 
+      less: {
+        modifyVars: {
+          'primary-color': '#1DA57A',
+          'heading-color': '#f00',
+        },
+        javascriptEnabled: true,
+      },
+    },
   },
 })

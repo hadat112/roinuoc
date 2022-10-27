@@ -12,7 +12,7 @@
 </script>
 
 <template>
-  <div class="max-w-[720px] text-left mx-auto text-lg leading-10 my-8">
+  <div class="max-w-[960px] text-left mx-auto text-lg leading-10 my-16 bg-white px-8 py-4">
     <tabs v-model:activeKey="activeKey">
       <tab-pane key="1" tab="Tab 1">
         <p class="tab-pane">
