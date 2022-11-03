@@ -13,29 +13,14 @@ const routes= [
         component: () => import("@/pages/home.vue"),
       },
       {
+        path: "/:slug",
+        name: 'post',
+        component: () => import("@/pages/post.vue"),
+      },
+      {
         path: "/gioithieu",
-        children: [
-          {
-            path: "",
-            name: "overview",
-            component: () => import("@/pages/overview.vue"),
-          },
-          {
-            path: "lichsu",
-            name: "history",
-            component: () => import("@/pages/history.vue"),
-          },
-          {
-            path: "quytrinh",
-            name: "steps",
-            component: () => import("@/pages/steps.vue"),
-          },
-          {
-            path: "giatri",
-            name: "value",
-            component: () => import("@/pages/value.vue"),
-          }
-        ]
+        name: "overview",
+        component: () => import("@/pages/overview.vue"),
       },
       {
         path: '/sukien',
