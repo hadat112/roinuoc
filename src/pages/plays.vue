@@ -45,7 +45,6 @@ watch(()=> playName.value, () => {
 
 <template>
     <div class="flex flex-col">
-
         {{ data }}
         <form class="w-full" @submit.prevent="handleSubmit" action="">
             <label for=""> name </label>

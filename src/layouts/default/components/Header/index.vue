@@ -9,24 +9,6 @@ const navItems = [
   {
     name: "Giới thiệu",
     path: "/gioithieu",
-    children: [
-      {
-        name: "Lịch sử phát triển của múa rối",
-        path: "/lichsu",
-      },
-      {
-        name: "quytrinh",
-        path: "/quytrinh",
-      },
-      {
-        name: "giatri",
-        path: "/giatri",
-      },
-      {
-        name: "nghesi",
-        path: "/nghesi",
-      },
-    ],
   },
   {
     name: "Sự kiện",
@@ -63,7 +45,7 @@ const route = useRoute();
             {{ item.name }}
           </span>
         </router-link>
-        <template v-if="item.children" #overlay>
+        <!-- <template v-if="item.children" #overlay>
           <Menu>
             <menu-item v-for="subnav in item.children">
               <router-link :to="item.path + subnav.path" class="hover:text-white">
@@ -75,7 +57,7 @@ const route = useRoute();
               </router-link>
             </menu-item>
           </Menu>
-        </template>
+        </template> -->
       </Dropdown>
     </div>
   </div>
@@ -85,5 +67,9 @@ const route = useRoute();
   .nav-item:deep(ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light) {
     border-radius: 4px;
     padding: 4px;
+  }
+
+  .actived {
+    border-top: 3px solid white;
   }
 </style>
