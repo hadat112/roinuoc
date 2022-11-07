@@ -11,7 +11,7 @@ async function createPost(title: string, content: string) {
   const dataForm = { title: title, content: content, slug: title };
   console.log(dataForm);
 
-  const response = await fetch("http://localhost:3000/post", {
+  const response = await fetch("http://localhost:3000/overview/post", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(dataForm),
