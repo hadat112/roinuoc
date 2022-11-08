@@ -33,7 +33,7 @@ const handleFinished = () => {
     <template #title>
       <div class="relative flex items-center py-2">
         <p class="m-0 flex justify-center flex-1">
-          <span> Create new post </span>
+          <span> Tao bai viet moi </span>
         </p>
       </div>
     </template>
