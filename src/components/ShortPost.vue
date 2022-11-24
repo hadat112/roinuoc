@@ -89,8 +89,8 @@ const handleDelete = () => {
     </p>
     <template #footer>
       <div class="flex justify-end gap-x-3">
-        <Button size="small" @click="showDeleteModal = false">Huy</Button>
-        <Button size="small" @click="handleDelete">Co</Button>
+        <DButton size="small" @click="showDeleteModal = false">Huy</DButton>
+        <DButton size="small" @click="handleDelete">Co</DButton>
       </div>
     </template>
   </DModal>

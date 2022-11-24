@@ -8,7 +8,7 @@ const navItems = [
   },
   {
     name: "Giới thiệu",
-    path: "/gioithieu",
+    path: "/overview",
   },
   {
     name: "Sự kiện",

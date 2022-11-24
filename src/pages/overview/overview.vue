@@ -3,12 +3,20 @@ import { onMounted, ref, watch } from "vue";
 import { Input as DInput, Button as DButton } from "ant-design-vue";
 import ShortPost from "@/components/ShortPost.vue";
 import CreatePost from "./components/CreatePost.vue";
+import { useRoute } from "vue-router";
 
+const slug = useRoute().fullPath;
+console.log(slug);
 const posts = ref();
 const showModal = ref(false);
 
 async function createPost(title: string, content: string) {
-  const dataForm = { title: title, content: content, slug: title };
+  const dataForm = {
+    title: title,
+    content: content,
+    slug: title,
+    type: "overview",
+  };
   console.log(dataForm);
 
   const response = await fetch("http://localhost:3000/overview/post", {
@@ -20,7 +28,7 @@ async function createPost(title: string, content: string) {
   console.log(response);
 }
 
-const handleSubmit = (title: string, content:any) => {
+const handleSubmit = (title: string, content: any) => {
   createPost(title, content.ops[0].insert);
 };
 
@@ -28,6 +36,7 @@ async function getPostList() {
   const response = await fetch("http://localhost:3000/overview", {
     method: "GET",
   });
+
   const data = await response.json();
   return data;
 }
