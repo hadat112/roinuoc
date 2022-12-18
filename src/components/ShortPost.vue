@@ -64,7 +64,7 @@ const handleDelete = () => {
       <Divider style="height: 2px; background-color: #7cb305" />
     </div>
     <p
-      class="text-lg leading-10 text-justify mb-8 max-h-[300px] overflow-hidden"
+      class="text-lg leading-10 text-justify mb-8 max-h-[200px] overflow-hidden"
     >
       {{ props.data.content }}
     </p>
