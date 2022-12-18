@@ -36,7 +36,17 @@ const routes= [
         path: '/lichchieu',
         name: "lich-chieu",
         component: () => import("@/pages/schedule.vue"),
-      }
+      },
+        {
+          path: '/dangky',
+          name: "dang-ky",
+          component: () => import("@/pages/auth.vue"),
+        },
+        {
+          path: '/dangnhap',
+          name: "dang-nhap",
+          component: () => import("@/pages/auth.vue"),
+        }
     ],
   },
 ];

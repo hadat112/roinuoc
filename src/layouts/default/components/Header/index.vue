@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import { Dropdown, Menu, MenuItem } from "ant-design-vue";
+import { Dropdown, Menu, MenuItem, Avatar } from "ant-design-vue";
+import { UserOutlined, DownOutlined } from "@ant-design/icons-vue";
 const navItems = [
   {
     name: "Trang chủ",
@@ -29,7 +30,7 @@ const route = useRoute();
 
 <template>
   <div
-    class="header w-full h-16 flex justify-center items-center gap-4 text-base text-white font-bold"
+    class="header w-full h-16 flex justify-center items-center gap-4 text-base text-white font-bold relative"
   >
     <div
       v-for="(item, index) in navItems"
@@ -59,6 +60,15 @@ const route = useRoute();
           </Menu>
         </template> -->
       </Dropdown>
+    </div>
+    <div class="absolute right-4 flex gap-2 items-center cursor-pointer">
+      <Avatar class="flex items-center justify-center">
+        <template #icon>
+          <user-outlined  />
+        </template>
+      </Avatar>
+      Hadat
+      <down-outlined />
     </div>
   </div>
 </template>
