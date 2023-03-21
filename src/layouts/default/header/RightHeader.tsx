@@ -1,6 +1,7 @@
 import { Avatar, Dropdown, MenuProps } from 'antd';
 import { useEffect, useState } from 'react';
 import { ArrowDownIcon, LogOutIcon } from '@/components/icons';
+import { useRouter } from 'next/router';
 
 export interface IInfo {
   id: string;
@@ -24,12 +25,13 @@ export default function RightHeader() {
     },
   ];
 
+  const router = useRouter();
+
   const [userInfo, setUserInfo] = useState<IInfo>();
 
   const handleLogOut = async () => {
-    const Auth = await import('@/configs/auth');
     if (typeof window !== 'undefined') localStorage.clear();
-    Auth.logout();
+    router.push('/auth');
   };
 
   useEffect(() => {

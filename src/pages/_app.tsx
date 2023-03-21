@@ -1,6 +1,3 @@
-import type { AppProps } from 'next/app';
-import { ReactElement, ReactNode } from 'react';
-import { NextPage } from 'next';
 import { ConfigProvider } from 'antd';
 import theme from '@/configs/antd';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -10,22 +7,11 @@ import '@/styles/globals.scss';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import Header from '@/layouts/default/header';
 import Navbar from '@/layouts/default/navbar';
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  // eslint-disable-next-line no-unused-vars
-  getLayout?: (page: ReactElement) => ReactNode;
-};
-
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
+import DefaultLayout from '@/layouts/default';
 
 const queryClient = new QueryClient();
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page);
-
+export default function App({ Component, pageProps }) {
   return (
     <ConfigProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
@@ -35,7 +21,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
               <Header>
                 <Navbar />
               </Header>
-              {getLayout(<Component {...pageProps} />)}
+              <DefaultLayout>
+                <Component {...pageProps} />
+              </DefaultLayout>
             </main>
           </div>
         </ErrorBoundary>

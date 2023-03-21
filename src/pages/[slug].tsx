@@ -1,10 +1,11 @@
-import { Divider, Tooltip, Avatar, Input } from 'antd';
+import { Divider, Tooltip, Avatar, Input, message } from 'antd';
 import dayjs from 'dayjs';
 import { LikeFilled, LikeOutlined, DislikeFilled, DislikeOutlined } from '@ant-design/icons';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useRouter } from 'next/router';
 import { Comment } from '@ant-design/compatible';
 import { useEffect, useState } from 'react';
+import { getPostDetail } from '@/services/puppetService';
 dayjs.extend(relativeTime);
 
 export default function Post() {
@@ -26,14 +27,10 @@ export default function Post() {
     setAction('disliked');
   };
 
-  const url = `http://localhost:3000${router.pathname}`;
-
   async function getPost() {
-    const response = await fetch(url, {
-      method: 'GET',
-    });
-    const data = await response.json();
-    setPost(data);
+    const response = await getPostDetail({ slug: router.asPath.split('/')[1] });
+    if (!response.data) message.error('da co loi');
+    setPost(response.data);
   }
 
   useEffect(() => {
@@ -55,8 +52,8 @@ export default function Post() {
 
         <Comment
           className="self-start border-0 border-solid border-grey-200 border-t"
-          actions={
-            [<>
+          actions={[
+            <>
               <span key="comment-basic-like">
                 <Tooltip title="Like">
                   {action === 'liked' ? <LikeFilled onClick={onLike} /> : <LikeOutlined onClick={onLike} />}
@@ -74,8 +71,8 @@ export default function Post() {
                 <span>{dislikes}</span>
               </span>
               <span key="comment-basic-reply-to">Reply to</span>
-            </>]
-          }
+            </>,
+          ]}
           author={<a>Hà Đạt</a>}
           avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
           content={<p>Bài viết rất hay rất ý nghĩa.</p>}

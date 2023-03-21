@@ -1,4 +1,5 @@
-import { Input, Button } from 'antd';
+import { createPost, deletePost, getPost } from '@/services/puppetService';
+import { Input, Button, message } from 'antd';
 import { useEffect, useState } from 'react';
 import CreatePost from './components/CreatePost';
 import ShortPost from './components/ShortPost';
@@ -7,33 +8,35 @@ import Sider from './components/Sider';
 export default function Overview() {
   const [modalState, setModalState] = useState({ open: false });
   const [post, setPost] = useState<any>();
-  const createPost = async (title: string, content: string) => {
+
+  const handleSubmit = async (title: string, content: any) => {
     const dataForm = {
       title: title,
       content: content,
       slug: title,
       type: 'overview',
     };
+    const result: any = await createPost(dataForm);
 
-    await fetch('http://localhost:3000/overview/post', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dataForm),
-    });
+    if (result.error) {
+      setModalState({ open: false });
+      return message.error(result.error);
+    }
+    setModalState({ open: false });
   };
 
-  const handleSubmit = (title: string, content: any) => {
-    createPost(title, content.ops[0].insert);
+  const handleDeletePost = async (id) => {
+    const result: any = await deletePost({ id });
+    if (result.error) return message.error(result.error);
+
+    const newPost = post.filter((post) => post._id !== id);
+
+    setPost(newPost);
   };
 
   const getPostList = async () => {
-    const response = await fetch('http://localhost:3000/overview', {
-      method: 'GET',
-    });
-
-    const data = await response.json();
-
-    setPost(data);
+    const response = await getPost();
+    setPost(response);
   };
 
   useEffect(() => {
@@ -42,17 +45,26 @@ export default function Overview() {
 
   return (
     <div className="flex flex-col w-full p-4 relative">
-      <div className="max-w-[900px] w-full flex gap-4 mx-auto">
+      <div className="max-w-[50%] w-full flex gap-4 mx-auto">
         <Input />
         <Button className="text-2xl leading-5" onClick={() => setModalState({ open: true })}>
           +
         </Button>
       </div>
-      <div className="w-full flex-1" v-for="post in posts">
-        <ShortPost data={post} />
-      </div>
+
+      {post?.map((post) => {
+        return (
+          <div key={post._id} className="w-full flex-1">
+            <ShortPost handleDelete={handleDeletePost} data={post} />
+          </div>
+        );
+      })}
       <Sider />
-      <CreatePost onOk={handleSubmit} visible={modalState.open} />
+      <CreatePost
+        onOk={handleSubmit}
+        onCancel={() => setModalState({ open: false })}
+        visible={modalState.open}
+      />
     </div>
   );
 }

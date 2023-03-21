@@ -1,6 +1,8 @@
 import { Modal, Button, Input, Form } from 'antd';
 import { useState } from 'react';
 // import { QuillEditor as DEditor } from "@vueup/vue-quill";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 interface IProps {
   visible?: boolean;
@@ -14,11 +16,16 @@ export default function CreatePost({ visible, title, onOk, onCancel }: IProps) {
   const [postState, setPostState] = useState<{ title: string; content: string }>();
 
   const handleFinished = () => {
+    setPostState({title: '', content: ''});
     onOk(postState.title, postState.content);
   };
 
   const handleChangeTitle = (value) => {
-    setPostState((state) => ({ ...state, tilte: value }));
+    setPostState((state) => ({ ...state, title: value.target.value }));
+  };
+
+  const handleChangeContent = (value) => {
+    setPostState((state) => ({ ...state, content: value }));
   };
 
   const Title = (
@@ -32,7 +39,7 @@ export default function CreatePost({ visible, title, onOk, onCancel }: IProps) {
   const Footer = (
     <div className="flex justify-end gap-x-3">
       <Button size="small" onClick={handleFinished}>
-        Post
+        Gui
       </Button>
     </div>
   );
@@ -45,8 +52,7 @@ export default function CreatePost({ visible, title, onOk, onCancel }: IProps) {
         </Form.Item>
         <div className="post-content">
           <Form.Item name="content">
-            <Input.TextArea />
-            {/* <DEditor v-model:content="PostState.content" theme="snow" toolbar="full" /> */}
+            <ReactQuill onChange={handleChangeContent} />
           </Form.Item>
         </div>
       </Form>

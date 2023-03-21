@@ -6,7 +6,6 @@ import CustomerIcon from '@/components/icons/CustomerIcon.svg';
 import FilterIcon from '@/components/icons/FilterIcon.svg';
 import HomeIcon from '@/components/icons/HomeIcon.svg';
 import LightingIcon from '@/components/icons/LightingIcon.svg';
-import LogoHCNSmall from '@/components/icons/LogoHCNSmall.svg';
 import LogOutIcon from '@/components/icons/LogOutIcon.svg';
 import MoreIcon from '@/components/icons/MoreIcon.svg';
 import RefreshIcon from '@/components/icons/RefreshIcon.svg';
@@ -25,7 +24,6 @@ export {
   FilterIcon,
   HomeIcon,
   LightingIcon,
-  LogoHCNSmall,
   LogOutIcon,
   MoreIcon,
   RefreshIcon,
