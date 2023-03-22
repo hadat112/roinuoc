@@ -1,11 +1,12 @@
-import { Divider, Tooltip, Avatar, Input, message } from 'antd';
+import { Divider, Tooltip, Avatar, Input, message, Button } from 'antd';
 import dayjs from 'dayjs';
 import { LikeFilled, LikeOutlined, DislikeFilled, DislikeOutlined } from '@ant-design/icons';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useRouter } from 'next/router';
 import { Comment } from '@ant-design/compatible';
 import { useEffect, useState } from 'react';
-import { getPostDetail } from '@/services/puppetService';
+import { createComment, getPostDetail } from '@/services/puppetService';
+
 dayjs.extend(relativeTime);
 
 export default function Post() {
@@ -14,6 +15,8 @@ export default function Post() {
   const [dislikes, setDislikes] = useState<number>(0);
   const [action, setAction] = useState<string>();
   const [post, setPost] = useState<any>();
+  const [comment, setComment] = useState<string>();
+  const [comments, setComments] = useState<any>();
 
   const onLike = () => {
     setLikes(1);
@@ -27,10 +30,26 @@ export default function Post() {
     setAction('disliked');
   };
 
+  const handleComment = (value) => {
+    setComment(value.target.value);
+  };
+
+  const handleSendComment = async () => {
+    const result: any = await createComment({
+      post_id: post._id,
+      content: comment,
+    });
+    if (result.error) {
+      return message.error(result.error);
+    }
+    setComments(state=>([result.data, ...state]));
+  };
+
   async function getPost() {
     const response = await getPostDetail({ slug: router.asPath.split('/')[1] });
     if (!response.data) message.error('da co loi');
-    setPost(response.data);
+    setPost(response.data?.post);
+    setComments(response.data?.comments);
   }
 
   useEffect(() => {
@@ -48,40 +67,49 @@ export default function Post() {
         <p className="text-lg leading-10 text-justify mb-8">{post?.content}</p>
 
         <span className="self-start text-xl font-semibold">Comment</span>
-        <Input.TextArea placeholder="Để lại comment của bạn" />
-
-        <Comment
-          className="self-start border-0 border-solid border-grey-200 border-t"
-          actions={[
-            <>
-              <span key="comment-basic-like">
-                <Tooltip title="Like">
-                  {action === 'liked' ? <LikeFilled onClick={onLike} /> : <LikeOutlined onClick={onLike} />}
+        <Input.TextArea onChange={handleComment} placeholder="Để lại comment của bạn" />
+        <Button onClick={handleSendComment}>Gui</Button>
+        {comments?.map((comment) => {
+          return (
+            <Comment
+              key={comment._id}
+              className="self-start border-0 border-solid border-grey-200 border-t"
+              actions={[
+                <>
+                  <span key="comment-basic-like">
+                    <Tooltip title="Like">
+                      {action === 'liked' ? (
+                        <LikeFilled onClick={onLike} />
+                      ) : (
+                        <LikeOutlined onClick={onLike} />
+                      )}
+                    </Tooltip>
+                    <span>{likes}</span>
+                  </span>
+                  <span key="comment-basic-dislike">
+                    <Tooltip title="Dislike">
+                      {action === 'disliked' ? (
+                        <DislikeFilled onClick={onDislike} />
+                      ) : (
+                        <DislikeOutlined onClick={onDislike} />
+                      )}
+                    </Tooltip>
+                    <span>{dislikes}</span>
+                  </span>
+                  <span key="comment-basic-reply-to">Reply to</span>
+                </>,
+              ]}
+              author={<a>{comment?.username}</a>}
+              avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+              content={<p>{comment?.content}</p>}
+              datetime={
+                <Tooltip title={dayjs().format('YYYY-MM-DD HH:mm:ss')}>
+                  <span>{dayjs(comment?.updatedAt).fromNow()}</span>
                 </Tooltip>
-                <span>{likes}</span>
-              </span>
-              <span key="comment-basic-dislike">
-                <Tooltip title="Dislike">
-                  {action === 'disliked' ? (
-                    <DislikeFilled onClick={onDislike} />
-                  ) : (
-                    <DislikeOutlined onClick={onDislike} />
-                  )}
-                </Tooltip>
-                <span>{dislikes}</span>
-              </span>
-              <span key="comment-basic-reply-to">Reply to</span>
-            </>,
-          ]}
-          author={<a>Hà Đạt</a>}
-          avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
-          content={<p>Bài viết rất hay rất ý nghĩa.</p>}
-          datetime={
-            <Tooltip title={dayjs().format('YYYY-MM-DD HH:mm:ss')}>
-              <span>{dayjs().fromNow()}</span>
-            </Tooltip>
-          }
-        ></Comment>
+              }
+            ></Comment>
+          );
+        })}
       </div>
     </>
   );

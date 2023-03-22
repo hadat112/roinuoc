@@ -35,7 +35,8 @@ export default function Overview() {
   };
 
   const getPostList = async () => {
-    const response = await getPost();
+    const response:any = await getPost();
+    if(response.error) return;
     setPost(response);
   };
 

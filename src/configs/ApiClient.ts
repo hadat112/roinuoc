@@ -43,6 +43,8 @@ class ApiClient {
         // const token = localStorage.getItem('token') ?? '';
         if (config.headers) {
           // config.headers[this.tokenType] = this.tokenType !== 'Authorization' ? token : `Bearer ${token}`;
+          config.headers['Authorization'] =
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJkYXRodjMzMyIsImlhdCI6MTY3OTUwNDU0MiwiZXhwIjoxNjc5NTA2MDQyfQ.Pz2PL6_dnYi8UBLSR_4UOj7VgE2BOZQ8DQLi47uiBxo';
           config.headers['apptype'] = 'web';
         }
         return config;
@@ -87,14 +89,14 @@ class ApiClient {
             }
             isRefreshing = true;
 
-            // Call auth server to refresh accessToken
-            Auth.login(() => {
-              isRefreshing = false;
-              const accessToken = Auth.getTokenId();
-              localStorage.setItem('token', accessToken);
-              processQueue(null, accessToken);
-              if (config) return api(config);
-            });
+            // // Call auth server to refresh accessToken
+            // Auth.login(() => {
+            //   isRefreshing = false;
+            //   const accessToken = Auth.getTokenId();
+            //   localStorage.setItem('token', accessToken);
+            //   processQueue(null, accessToken);
+            //   if (config) return api(config);
+            // });
 
             return Promise.reject(error);
           default:
