@@ -31,7 +31,7 @@ export default function RightHeader() {
 
   const handleLogOut = async () => {
     if (typeof window !== 'undefined') localStorage.clear();
-    router.push('/auth');
+    router.push('/login');
   };
 
   useEffect(() => {
@@ -56,8 +56,8 @@ export default function RightHeader() {
         <div className="flex items-center gap-x-3 hover:cursor-pointer py-2">
           <Avatar src={userInfo?.avatar} alt="avatar" size="large" />
           <div className="flex flex-col justify-center">
-            <p className="text-base text-white font-bold mb-0 whitespace-nowrap">{userInfo?.fullname}</p>
-            <p className="text-sm text-white mb-0">{userInfo?.username}</p>
+            <p className="text-base text-yellow font-bold mb-0 whitespace-nowrap">{userInfo?.fullname}</p>
+            <p className="text-sm text-yellow mb-0">{userInfo?.username}</p>
           </div>
           <ArrowDownIcon className="text-xl text-white" />
         </div>

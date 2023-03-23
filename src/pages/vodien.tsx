@@ -120,7 +120,6 @@ export default function Plays() {
               })}
             </div>
           </div>
-          <Sider></Sider>
         </div>
       </div>
     </>

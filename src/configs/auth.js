@@ -1,6 +1,6 @@
 import ApiClient from '@/configs/ApiClient';
 
-const AUTH_API = process.env.NEXT_PUBLIC_AUTH_URL;
+const AUTH_API = process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH;
 const api = new ApiClient(AUTH_API).getInstance();
 
 export const getTokenId = () => {

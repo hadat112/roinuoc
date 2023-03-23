@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import { Timeline } from 'antd';
 import { ClockCircleOutlined } from '@ant-design/icons';
-// import { marked } from 'marked';
 import { useState } from 'react';
+import { createMarkUp } from './overview/components/ShortPost';
 
 const histories = {
   '1945': [
@@ -16,55 +16,51 @@ const histories = {
 };
 
 export default function History() {
-  const [current] = useState<string>();
-
-  // const markedText = (input: string) => {
-  //   return marked(input);
-  // };
+  const [current, setCurrent] = useState<string>('1945');
 
   return (
-    <>
-      <div className="w-full">
-        {histories[current].map((item, index) => {
+    <div>
+      <div className="w-full absolute">
+        {histories[current]?.map((item, index) => {
           return (
             <div className="" key={index}>
-              <h1 v-if="!index" className="text-2xl max-w-[720px] ml-auto mr-auto w-full text-center my-8">
-                {item}
-              </h1>
-              <p
-                v-else
-                className="max-w-[720px] text-lg leading-10 ml-auto mr-auto w-full text-left mb-6"
-                v-html="markedText(item)"
-              ></p>
+              {!index ? (
+                <h1 className="text-2xl max-w-[720px] ml-auto mr-auto w-full text-center my-8">{item}</h1>
+              ) : (
+                <p className="max-w-[720px] text-lg leading-10 ml-auto mr-auto w-full text-left mb-6">
+                  <div dangerouslySetInnerHTML={createMarkUp(item)}></div>
+                </p>
+              )}
             </div>
           );
         })}
-        <div className="pt-32 pr-32 timeline fixed right-0"></div>
-        <Timeline className="z-index-200" mode="right">
-          <Timeline.Item>Lịch sử hình thành</Timeline.Item>
-          <Timeline.Item
-            dot={<ClockCircleOutlined className="text-[16px]" />}
-            className="cursor-pointer"
-            // onClick={() => setCurrent('1945')}
-          >
-            Trước 1945
-          </Timeline.Item>
-          <Timeline.Item
-            dot={<ClockCircleOutlined className="text-[16px]" />}
-            className="cursor-pointer"
-            // onClick={() => setCurrent('1986')}
-          >
-            1945 đến 1986
-          </Timeline.Item>
-          <Timeline.Item
-            dot={<ClockCircleOutlined className="text-[16px]" />}
-            className="cursor-pointer"
-            // onClick={() => setCurrent('2023')}
-          >
-            1986 đến nay
-          </Timeline.Item>
-        </Timeline>
+        <div className="pt-32 pr-32 timeline fixed right-0 top-0">
+          <Timeline className="z-index-200" mode="left">
+            <Timeline.Item>Lịch sử hình thành</Timeline.Item>
+            <Timeline.Item
+              dot={<ClockCircleOutlined className="text-[16px]" />}
+              className="cursor-pointer"
+              onClick={() => setCurrent('1945')}
+            >
+              Trước 1945
+            </Timeline.Item>
+            <Timeline.Item
+              dot={<ClockCircleOutlined className="text-[16px]" />}
+              className="cursor-pointer"
+              onClick={() => setCurrent('1986')}
+            >
+              1945 đến 1986
+            </Timeline.Item>
+            <Timeline.Item
+              dot={<ClockCircleOutlined className="text-[16px]" />}
+              className="cursor-pointer"
+              // onClick={() => setCurrent('2023')}
+            >
+              1986 đến nay
+            </Timeline.Item>
+          </Timeline>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

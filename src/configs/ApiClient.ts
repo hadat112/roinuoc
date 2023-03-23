@@ -40,12 +40,9 @@ class ApiClient {
 
     api.interceptors.request.use(
       (config: any) => {
-        // const token = localStorage.getItem('token') ?? '';
+        const token = localStorage.getItem('token') ?? '';
         if (config.headers) {
-          // config.headers[this.tokenType] = this.tokenType !== 'Authorization' ? token : `Bearer ${token}`;
-          config.headers['Authorization'] =
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJkYXRodjMzMyIsImlhdCI6MTY3OTUwNDU0MiwiZXhwIjoxNjc5NTA2MDQyfQ.Pz2PL6_dnYi8UBLSR_4UOj7VgE2BOZQ8DQLi47uiBxo';
-          config.headers['apptype'] = 'web';
+          config.headers['Authorization'] = `Bearer ${token}`;
         }
         return config;
       },
@@ -57,7 +54,6 @@ class ApiClient {
     api.interceptors.response.use(
       (response: AxiosResponse) => {
         const data = response.data;
-
         if (data.success === false) {
           const message = typeof data?.message === 'string' ? data?.message : '';
           return { ...response.data, status: 400, error: message || 'Có lỗi trong quá trình thực thi' };
@@ -89,14 +85,14 @@ class ApiClient {
             }
             isRefreshing = true;
 
-            // // Call auth server to refresh accessToken
-            // Auth.login(() => {
-            //   isRefreshing = false;
-            //   const accessToken = Auth.getTokenId();
-            //   localStorage.setItem('token', accessToken);
-            //   processQueue(null, accessToken);
-            //   if (config) return api(config);
-            // });
+            // Call auth server to refresh accessToken
+            Auth.login(() => {
+              isRefreshing = false;
+              const accessToken = Auth.getTokenId();
+              localStorage.setItem('token', accessToken);
+              processQueue(null, accessToken);
+              if (config) return api(config);
+            });
 
             return Promise.reject(error);
           default:

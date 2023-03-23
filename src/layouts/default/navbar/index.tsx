@@ -31,9 +31,9 @@ const navItems = [
   },
   {
     icon: <HomeIcon />,
-    key: '/lichchieu',
-    label: 'Lịch chiếu',
-    path: '/lichchieu',
+    key: '/giatri',
+    label: 'Giá trị',
+    path: '/giatri',
   },
 ];
 
@@ -53,7 +53,7 @@ export default function Navbar() {
 
   return (
     <Menu
-      className="bg-primary text-white border-none custom-menu text-[16px] h-full"
+      className="bg-primary text-yellow border-none custom-menu text-[16px] h-full"
       onClick={onClick}
       selectedKeys={[current]}
       mode="horizontal"
