@@ -1,7 +1,11 @@
 import api from './index';
 
-export const getPost = () => {
-  return api.get('/overview/posts');
+export const getPost = (params: { type: string }) => {
+  return api.get('/overview/posts', { params });
+};
+
+export const searchPost = (params: { text: string }) => {
+  return api.get('/overview/search', { params });
 };
 
 export const getPostDetail = (params) => {

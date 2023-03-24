@@ -10,7 +10,14 @@ export const getTokenId = () => {
   return accessToken;
 };
 
-export const login = (nextFn = () => {}) => {
+export const getRefreshToken = async () => {
+  const refresh_token = localStorage.getItem('refresh_token');
+  console.log(refresh_token);
+  const res = await api.post('/refresh-token', { refresh_token });
+  console.log(res);
+};
+
+export const login = (nextFn = () => { }) => {
   try {
     api.get('/login');
     nextFn();

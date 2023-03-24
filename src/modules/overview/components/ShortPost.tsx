@@ -3,6 +3,7 @@ import { EllipsisOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useState } from 'react';
 import { marked } from 'marked';
+import dayjs from 'dayjs';
 
 interface IProps {
   // eslint-disable-next-line no-unused-vars
@@ -12,13 +13,14 @@ interface IProps {
     content: string;
     slug: string;
     _id: string;
+    created_at: string;
   };
 }
 
 export const createMarkUp = (val) => {
+  if(val)
   return { __html: marked(val) };
 };
-
 
 export default function ShortPost(props: IProps) {
   const items: MenuProps['items'] = [
@@ -33,7 +35,7 @@ export default function ShortPost(props: IProps) {
     props.handleDelete(props.data?._id);
     setDeleteState({ open: false });
   };
-  
+
   return (
     <>
       <div className="max-w-[50%] bg-white px-16 pt-8 pb-8 mx-auto mt-8 flex flex-col items-center relative">
@@ -43,7 +45,7 @@ export default function ShortPost(props: IProps) {
           </span>
         </Dropdown>
         <h1 className="text-3xl font-bold text-center leading-10 mb-4">{props.data?.title}</h1>
-        <span className="">06/10/2022 - Rối nước tế tiêu - 0 Bình luận</span>
+        <span className="">{dayjs(props.data?.created_at).format('DD-MM-YYYY')} - Rối nước tế tiêu - 0 Bình luận</span>
         <div className="w-[60px]">
           <Divider className="h-[2px]" />
         </div>
@@ -51,7 +53,7 @@ export default function ShortPost(props: IProps) {
           <div dangerouslySetInnerHTML={createMarkUp(props.data?.content)}></div>
         </p>
         <Button>
-          <Link href={props.data?.slug || '/'}> Đọc thêm </Link>
+          <Link href={'/overview/' + props.data?.slug || '/'}> Đọc thêm </Link>
         </Button>
       </div>
       <Modal
@@ -59,20 +61,20 @@ export default function ShortPost(props: IProps) {
         className="modal-web"
         width="720"
         onCancel={() => setDeleteState({ open: false })}
-        title={<div className="relative flex items-center justify-center py-2">Xoa bai viet</div>}
+        title={<div className="relative flex items-center justify-center py-2">Xoá bài viết</div>}
         footer={
           <div className="flex justify-end gap-x-3">
             <Button size="small" onClick={() => setDeleteState({ open: false })}>
-              Huy
+              Huỷ
             </Button>
             <Button size="small" onClick={handleDelete}>
-              Co
+              Đồng ý
             </Button>
           </div>
         }
       >
         <p className="m-0 flex justify-center flex-1">
-          <span> Ban co muon xoa bai viet nay? </span>
+          <span> Bạn có muốn xoá bài viết này? </span>
         </p>
       </Modal>
     </>

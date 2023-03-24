@@ -31,7 +31,7 @@ export default function CreatePost({ visible, title, onOk, onCancel }: IProps) {
   const Title = (
     <div className="relative flex items-center py-2">
       <p className="m-0 flex justify-center flex-1">
-        <span> Tao bai viet moi </span>
+        <span> Thêm bài viêt mới </span>
       </p>
     </div>
   );
@@ -39,7 +39,7 @@ export default function CreatePost({ visible, title, onOk, onCancel }: IProps) {
   const Footer = (
     <div className="flex justify-end gap-x-3">
       <Button size="small" onClick={handleFinished}>
-        Gui
+        Đăng
       </Button>
     </div>
   );
@@ -48,11 +48,11 @@ export default function CreatePost({ visible, title, onOk, onCancel }: IProps) {
     <Modal open={visible} onCancel={onCancel} className="modal-web" width="720" title={Title} footer={Footer}>
       <Form>
         <Form.Item name="title">
-          <Input onChange={handleChangeTitle} value={title} className="mb-6" placeholder="Title" />
+          <Input defaultValue={title} onChange={handleChangeTitle} value={postState?.title} className="mb-6" placeholder="Title" />
         </Form.Item>
         <div className="post-content">
           <Form.Item name="content">
-            <ReactQuill onChange={handleChangeContent} />
+            <ReactQuill value={postState?.content} onChange={handleChangeContent} />
           </Form.Item>
         </div>
       </Form>
