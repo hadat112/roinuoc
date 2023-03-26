@@ -40,14 +40,14 @@ export default function History() {
             <Timeline.Item
               dot={<ClockCircleOutlined className="text-[16px]" />}
               className="cursor-pointer"
-              onClick={() => setCurrent('1945')}
+            //   onClick={() => setCurrent('1945')}
             >
               Trước 1945
             </Timeline.Item>
             <Timeline.Item
               dot={<ClockCircleOutlined className="text-[16px]" />}
               className="cursor-pointer"
-              onClick={() => setCurrent('1986')}
+            //   onClick={() => setCurrent('1986')}
             >
               1945 đến 1986
             </Timeline.Item>
