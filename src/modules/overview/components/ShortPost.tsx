@@ -18,8 +18,7 @@ interface IProps {
 }
 
 export const createMarkUp = (val) => {
-  if(val)
-  return { __html: marked(val) };
+  if (val) return { __html: marked(val) };
 };
 
 export default function ShortPost(props: IProps) {
@@ -38,14 +37,16 @@ export default function ShortPost(props: IProps) {
 
   return (
     <>
-      <div className="max-w-[50%] bg-white px-16 pt-8 pb-8 mx-auto mt-8 flex flex-col items-center relative">
+      <div className="max-w-[900px] bg-white px-16 pt-8 pb-8 mx-auto mt-8 flex flex-col items-center relative">
         <Dropdown menu={{ items }}>
           <span className="text-2xl absolute top-3 right-4 cursor-pointer hover:bg-bg-body rounded-full p-1 w-[36px] h-[36px] flex items-center justify-center text-center">
             <EllipsisOutlined />
           </span>
         </Dropdown>
         <h1 className="text-3xl font-bold text-center leading-10 mb-4">{props.data?.title}</h1>
-        <span className="">{dayjs(props.data?.created_at).format('DD-MM-YYYY')} - Rối nước tế tiêu - 0 Bình luận</span>
+        <span className="">
+          {dayjs(props.data?.created_at).format('DD-MM-YYYY')} - Rối nước tế tiêu - 0 Bình luận
+        </span>
         <div className="w-[60px]">
           <Divider className="h-[2px]" />
         </div>
@@ -53,7 +54,7 @@ export default function ShortPost(props: IProps) {
           <div dangerouslySetInnerHTML={createMarkUp(props.data?.content)}></div>
         </p>
         <Button>
-          <Link href={'/overview/' + props.data?.slug || '/'}> Đọc thêm </Link>
+          <Link href={`/overview/${props.data?.slug}` || '/'}> Đọc thêm </Link>
         </Button>
       </div>
       <Modal

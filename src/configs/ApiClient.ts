@@ -85,13 +85,12 @@ class ApiClient {
             }
             isRefreshing = true;
 
-            // const accessToken = Auth.getRefreshToken();
-            // if(accessToken) {
-              // isRefreshing = false;
-            //   localStorage.setItem('token', accessToken);
-            //   // processQueue(null, accessToken);
-            //   if (config) return api(config);
-            // }
+            const accessToken = await Auth.getRefreshToken();
+            if (accessToken) {
+              isRefreshing = false;
+              processQueue(null, accessToken);
+              if (config) return api(config);
+            }
 
             return Promise.reject(error);
           default:

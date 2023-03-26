@@ -4,19 +4,18 @@ import { useEffect, useState } from 'react';
 import CreatePost from '../../modules/overview/components/CreatePost';
 import ShortPost from '../../modules/overview/components/ShortPost';
 import Sider from '../../modules/overview/components/Sider';
-import lo from 'lodash';
 
 export default function Overview() {
   const [modalState, setModalState] = useState({ open: false });
   const [post, setPost] = useState<any>();
 
   function removeAccents(str) {
-  return str
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/đ/g, 'd')
-    .replace(/Đ/g, 'D');
-    }
+    return str
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .replace(/Đ/g, 'D');
+  }
   const handleSubmit = async (title: string, content: any) => {
     const dataForm = {
       title: title,
@@ -55,27 +54,29 @@ export default function Overview() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full p-4 relative">
-      <div className="max-w-[50%] w-full flex gap-4 mx-auto">
-        <Input />
-        <Button className="text-2xl leading-5" onClick={() => setModalState({ open: true })}>
-          +
-        </Button>
-      </div>
+    <div className="flex bg-[#ECEFF1]">
+      <div className="flex flex-col flex-1 w-full p-4">
+        <div className="max-w-[900px] w-full flex gap-4 mx-auto">
+          <Input />
+          <Button className="text-2xl leading-5" onClick={() => setModalState({ open: true })}>
+            +
+          </Button>
+        </div>
 
-      {post?.map((post) => {
-        return (
-          <div key={post._id} className="w-full flex-1">
-            <ShortPost handleDelete={handleDeletePost} data={post} />
-          </div>
-        );
-      })}
-      <Sider />
-      <CreatePost
-        onOk={handleSubmit}
-        onCancel={() => setModalState({ open: false })}
-        visible={modalState.open}
-      />
+        {post?.map((post) => {
+          return (
+            <div key={post._id} className="w-full flex-1">
+              <ShortPost handleDelete={handleDeletePost} data={post} />
+            </div>
+          );
+        })}
+        <CreatePost
+          onOk={handleSubmit}
+          onCancel={() => setModalState({ open: false })}
+          visible={modalState.open}
+        />
+      </div>
+      <Sider className="" />
     </div>
   );
 }

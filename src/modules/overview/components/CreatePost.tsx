@@ -1,7 +1,8 @@
 import { Modal, Button, Input, Form } from 'antd';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 // import { QuillEditor as DEditor } from "@vueup/vue-quill";
-import ReactQuill from 'react-quill';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 
 interface IProps {
@@ -16,7 +17,7 @@ export default function CreatePost({ visible, title, onOk, onCancel }: IProps) {
   const [postState, setPostState] = useState<{ title: string; content: string }>();
 
   const handleFinished = () => {
-    setPostState({title: '', content: ''});
+    setPostState({ title: '', content: '' });
     onOk(postState.title, postState.content);
   };
 
@@ -48,7 +49,13 @@ export default function CreatePost({ visible, title, onOk, onCancel }: IProps) {
     <Modal open={visible} onCancel={onCancel} className="modal-web" width="720" title={Title} footer={Footer}>
       <Form>
         <Form.Item name="title">
-          <Input defaultValue={title} onChange={handleChangeTitle} value={postState?.title} className="mb-6" placeholder="Title" />
+          <Input
+            defaultValue={title}
+            onChange={handleChangeTitle}
+            value={postState?.title}
+            className="mb-6"
+            placeholder="Title"
+          />
         </Form.Item>
         <div className="post-content">
           <Form.Item name="content">

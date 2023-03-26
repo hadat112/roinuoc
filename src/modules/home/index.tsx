@@ -1,93 +1,173 @@
-import { Carousel, Divider, Button as DButton } from 'antd';
-import Sider from '../overview/components/Sider';
+import { Carousel } from 'antd';
+import { RiDoubleQuotesL, RiDoubleQuotesR } from 'react-icons/ri';
 
 export default function Home() {
   return (
-    <>
-      <div className="home w-full bg-bg-body">
-        <Carousel>
-          <div>
-            <img
-              className="block w-[100%] h-[520px] min-h-[520px] max-w-full"
-              src="http://www.baovanhoa.vn/Portals/0/EasyDNNNews/thumbs/22761/374132.png"
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              className="block w-[100%] h-[520px] min-h-[520px] max-w-full"
-              src="https://media.hanoitv.vn/thumb_x600x314/upload/2013/12/14/doc-dao-phuong-roi-co-te-tieu.jpg"
-              alt=""
-            />
-          </div>
-        </Carousel>
-        <div className="relative">
-          <div className="max-w-[900px] bg-white px-16 pt-8 pb-8 mx-auto mt-8 flex flex-col items-center">
-            <h1 className="text-3xl font-bold text-center leading-10 mb-4">
-              Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
-            </h1>
-            <span className="">06/10/2022 - Rối nước tế tiêu - 0 Bình luận</span>
-            <div className="w-[60px]">
-              <Divider />
-            </div>
-            <p className="text-lg leading-10 text-justify mb-8 max-h-[200px] overflow-clip">
-              Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được hình
-              thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò trên sân
-              khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn cũng như múa rối
-              nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời Lý, Trần (thế kỷ
-              XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam” (1974, trang 37-43),
-              Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung một lịch sử ra đời. Vào
-              thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được biểu diễn mừng ngày sinh nhật
-              đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi giả Vạn Thọ Nam Sơn, các con rối cô
-              tiên múa trong tiếng hát ca, tôn vinh vận nước hưng thịnh v.v., …
-            </p>
-            <DButton> Đọc thêm </DButton>
-          </div>
-          <div className="max-w-[900px] bg-white px-16 pt-8 pb-8 mx-auto mt-8 flex flex-col items-center">
-            <h1 className="text-3xl font-bold text-center leading-10 mb-4">
-              Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
-            </h1>
-            <span className="">06/10/2022 - Rối nước tế tiêu - 0 Bình luận</span>
-            <div className="w-[60px]">
-              <Divider />
-            </div>
-            <p className="text-lg leading-10 text-justify mb-8 max-h-[200px] overflow-clip">
-              Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được hình
-              thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò trên sân
-              khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn cũng như múa rối
-              nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời Lý, Trần (thế kỷ
-              XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam” (1974, trang 37-43),
-              Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung một lịch sử ra đời. Vào
-              thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được biểu diễn mừng ngày sinh nhật
-              đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi giả Vạn Thọ Nam Sơn, các con rối cô
-              tiên múa trong tiếng hát ca, tôn vinh vận nước hưng thịnh v.v., …
-            </p>
-            <DButton> Đọc thêm </DButton>
-          </div>
-          <div className="max-w-[900px] bg-white px-16 pt-8 pb-8 mx-auto mt-8 flex flex-col items-center">
-            <h1 className="text-3xl font-bold text-center leading-10 mb-4">
-              Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
-            </h1>
-            <span className="">06/10/2022 - Rối nước tế tiêu - 0 Bình luận</span>
-            <div className="w-[60px]">
-              <Divider />
-            </div>
-            <p className="text-lg leading-10 text-justify mb-8 max-h-[200px] overflow-clip">
-              Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được hình
-              thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò trên sân
-              khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn cũng như múa rối
-              nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời Lý, Trần (thế kỷ
-              XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam” (1974, trang 37-43),
-              Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung một lịch sử ra đời. Vào
-              thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được biểu diễn mừng ngày sinh nhật
-              đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi giả Vạn Thọ Nam Sơn, các con rối cô
-              tiên múa trong tiếng hát ca, tôn vinh vận nước hưng thịnh v.v., …
-            </p>
-            <DButton> Đọc thêm </DButton>
-          </div>
-          <Sider></Sider>
+    <div className="home w-full bg-bg-body bg-[#ECEFF1]">
+      <Carousel>
+        <div>
+          <img
+            className="block w-[100%] h-[520px] min-h-[520px] max-w-full object-cover"
+            src="https://lh3.google.com/u/0/d/1Ikd8vPkIM1gEcaxgo88aa4uJJFCGhbwr=w2880-h1642-iv1"
+            alt=""
+          />
         </div>
+        <div>
+          <img
+            className="block w-[100%] h-[520px] min-h-[520px] max-w-full object-cover"
+            src="https://lh3.google.com/u/0/d/1y4FGcotLnddFi5dW1kIxcRWlJqzxHO-3=w2880-h1192-iv1"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            className="block w-[100%] h-[520px] min-h-[520px] max-w-full object-cover"
+            src="https://lh3.google.com/u/0/d/1VVFeC2YpgIu34NAjyY7k2tR0WjBLwT2W=w2880-h1192-iv1"
+            alt=""
+          />
+        </div>
+        <div>
+          <img
+            className="block w-[100%] h-[520px] min-h-[520px] max-w-full object-cover"
+            src="https://lh3.google.com/u/0/d/1Ikd8vPkIM1gEcaxgo88aa4uJJFCGhbwr=w2880-h1642-iv1"
+            alt=""
+          />
+        </div>
+      </Carousel>
+      <div className="font-STXinwei w-[70%] mx-auto mt-12 p-4 bg-white rounded-xl">
+        <h1
+          className="font-[500] text-2xl text-[#8B4513] relative leading-10"
+          style={{ fontFamily: 'Tinos' }}
+        >
+          <RiDoubleQuotesL className=" text-3xl mr-2" />
+          Rối cạn Tế Tiêu là một loại hình nghệ thuật sân khấu dân gian truyền thống của Việt Nam, nổi tiếng
+          với các màn múa rối đẹp mắt và kịch tính. Nghệ thuật này được coi là biểu tượng của văn hoá dân gian
+          Việt Nam và là một phần không thể thiếu trong các lễ hội truyền thống của đất nước. Nghệ thuật rối
+          cạn Tế Tiêu được truyền lại từ đời này sang đời khác và đã có hơn 400 năm lịch sử. Các màn múa rối
+          đa dạng và phong phú, thể hiện rõ nét các cảnh vật, nhân vật và tình huống khác nhau trong cuộc
+          sống. Với giá trị giải trí, giáo dục và giáo dục đạo đức cho người xem, nghệ thuật rối cạn Tế Tiêu
+          là một phần quan trọng của văn hoá dân gian Việt Nam.
+          <RiDoubleQuotesR className=" text-3xl ml-2" />
+        </h1>
       </div>
-    </>
+      <div className="w-full mx-auto mt-32">
+        <video className="w-full" controls>
+          <source src="https://drive.google.com/uc?id=1JW1PVOYYg5QcGOisqVfuHVFY9N_8vCic" type="video/mp4" />{' '}
+        </video>
+      </div>
+      <Carousel className="mt-32 bg-white" effect="fade" autoplay>
+        <div>
+          <div className="flex items-center w-full gap-6 justify-center">
+            <div className="max-w-[300px] bg-white p-2 flex-col items-center flex-1">
+              <h3 className="text-base mb-[2px] font-bold text-yellow">
+                Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
+              </h3>
+              <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
+              <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
+                Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được hình
+                thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò trên sân
+                khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn cũng như múa
+                rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời Lý, Trần (thế kỷ
+                XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam” (1974, trang 37-43),
+                Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung một lịch sử ra đời. Vào
+                thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được biểu diễn mừng ngày sinh nhật
+                đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi giả Vạn Thọ Nam Sơn, các con rối cô
+                tiên múa trong tiếng hát ca, tôn vinh vận nước hưng thịnh v.v., …
+              </p>
+            </div>
+            <div className="max-w-[300px] bg-white p-2 flex-col items-center flex-1">
+              <h3 className="text-base mb-[2px] font-bold text-yellow">
+                Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
+              </h3>
+              <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
+              <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
+                Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được hình
+                thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò trên sân
+                khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn cũng như múa
+                rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời Lý, Trần (thế kỷ
+                XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam” (1974, trang 37-43),
+                Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung một lịch sử ra đời. Vào
+                thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được biểu diễn mừng ngày sinh nhật
+                đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi giả Vạn Thọ Nam Sơn, các con rối cô
+                tiên múa trong tiếng hát ca, tôn vinh vận nước hưng thịnh v.v., …
+              </p>
+            </div>
+            <div className="max-w-[300px] bg-white p-2 flex-col items-center flex-1">
+              <h3 className="text-base mb-[2px] font-bold text-yellow">
+                Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
+              </h3>
+              <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
+              <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
+                Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được hình
+                thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò trên sân
+                khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn cũng như múa
+                rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời Lý, Trần (thế kỷ
+                XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam” (1974, trang 37-43),
+                Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung một lịch sử ra đời. Vào
+                thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được biểu diễn mừng ngày sinh nhật
+                đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi giả Vạn Thọ Nam Sơn, các con rối cô
+                tiên múa trong tiếng hát ca, tôn vinh vận nước hưng thịnh v.v., …
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="flex items-center w-full gap-6 justify-center">
+            <div className="max-w-[300px] bg-white p-2 flex-col items-center flex-1">
+              <h3 className="text-base mb-[2px] font-bold text-yellow">
+                Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
+              </h3>
+              <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
+              <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
+                Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được hình
+                thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò trên sân
+                khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn cũng như múa
+                rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời Lý, Trần (thế kỷ
+                XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam” (1974, trang 37-43),
+                Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung một lịch sử ra đời. Vào
+                thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được biểu diễn mừng ngày sinh nhật
+                đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi giả Vạn Thọ Nam Sơn, các con rối cô
+                tiên múa trong tiếng hát ca, tôn vinh vận nước hưng thịnh v.v., …
+              </p>
+            </div>
+            <div className="max-w-[300px] bg-white p-2 flex-col items-center flex-1">
+              <h3 className="text-base mb-[2px] font-bold text-yellow">
+                Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
+              </h3>
+              <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
+              <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
+                Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được hình
+                thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò trên sân
+                khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn cũng như múa
+                rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời Lý, Trần (thế kỷ
+                XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam” (1974, trang 37-43),
+                Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung một lịch sử ra đời. Vào
+                thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được biểu diễn mừng ngày sinh nhật
+                đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi giả Vạn Thọ Nam Sơn, các con rối cô
+                tiên múa trong tiếng hát ca, tôn vinh vận nước hưng thịnh v.v., …
+              </p>
+            </div>
+            <div className="max-w-[300px] bg-white p-2 flex-col items-center flex-1">
+              <h3 className="text-base mb-[2px] font-bold text-yellow">
+                Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
+              </h3>
+              <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
+              <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
+                Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được hình
+                thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò trên sân
+                khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn cũng như múa
+                rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời Lý, Trần (thế kỷ
+                XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam” (1974, trang 37-43),
+                Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung một lịch sử ra đời. Vào
+                thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được biểu diễn mừng ngày sinh nhật
+                đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi giả Vạn Thọ Nam Sơn, các con rối cô
+                tiên múa trong tiếng hát ca, tôn vinh vận nước hưng thịnh v.v., …
+              </p>
+            </div>
+          </div>
+        </div>
+      </Carousel>
+      <div className="flex px-16 mt-8 pb-8 pt-8"></div>
+    </div>
   );
 }

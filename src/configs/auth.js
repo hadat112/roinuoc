@@ -1,4 +1,5 @@
 import ApiClient from '@/configs/ApiClient';
+import { message } from 'antd';
 
 const AUTH_API = process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH;
 const api = new ApiClient(AUTH_API).getInstance();
@@ -12,12 +13,17 @@ export const getTokenId = () => {
 
 export const getRefreshToken = async () => {
   const refresh_token = localStorage.getItem('refresh_token');
-  console.log(refresh_token);
   const res = await api.post('/refresh-token', { refresh_token });
-  console.log(res);
+  if (res.error) {
+    message.error(res.error);
+    return '';
+  }
+  localStorage.setItem('token', res.data?.token);
+  localStorage.setItem('refresh_token', res.data?.refreshToken);
+  return res.data?.refreshToken;
 };
 
-export const login = (nextFn = () => { }) => {
+export const login = (nextFn = () => {}) => {
   try {
     api.get('/login');
     nextFn();

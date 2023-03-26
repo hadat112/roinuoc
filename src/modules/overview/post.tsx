@@ -8,25 +8,25 @@ import { createComment, getPostDetail } from '@/services/puppetService';
 
 dayjs.extend(relativeTime);
 
-export default function Post({slug}) {
-//   const [likes, setLikes] = useState<number>(0);
-//   const [dislikes, setDislikes] = useState<number>(0);
-//   const [action, setAction] = useState<string>();
+export default function Post({ slug }) {
+  //   const [likes, setLikes] = useState<number>(0);
+  //   const [dislikes, setDislikes] = useState<number>(0);
+  //   const [action, setAction] = useState<string>();
   const [post, setPost] = useState<any>();
   const [comment, setComment] = useState<string>();
   const [comments, setComments] = useState<any>();
 
-//   const onLike = () => {
-//     setLikes(1);
-//     setDislikes(0);
-//     setAction('liked');
-//   };
+  //   const onLike = () => {
+  //     setLikes(1);
+  //     setDislikes(0);
+  //     setAction('liked');
+  //   };
 
-//   const onDislike = () => {
-//     setLikes(0);
-//     setDislikes(1);
-//     setAction('disliked');
-//   };
+  //   const onDislike = () => {
+  //     setLikes(0);
+  //     setDislikes(1);
+  //     setAction('disliked');
+  //   };
 
   const handleComment = (value) => {
     setComment(value.target.value);
@@ -59,7 +59,9 @@ export default function Post({slug}) {
     <>
       <div className="max-w-[900px] bg-white px-16 pt-8 pb-8 mx-auto mt-8 flex flex-col items-center">
         <h1 className="text-3xl font-bold text-center leading-10 mb-4">{post?.title}</h1>
-        <span className="">{dayjs(post?.created_at).format('DD-MM-YYYY')} - Rối nước tế tiêu - 0 Bình luận</span>
+        <span className="">
+          {dayjs(post?.created_at).format('DD-MM-YYYY')} - Rối nước tế tiêu - 0 Bình luận
+        </span>
         <div className="w-[60px]">
           <Divider />
         </div>

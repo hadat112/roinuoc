@@ -3,34 +3,36 @@ import type { MenuProps } from 'antd';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { HomeIcon } from '@/components/icons';
+import { RiBook3Line, RiCalendarEventLine, RiCopperDiamondLine } from 'react-icons/ri';
+import { MdOutlineTheaterComedy } from 'react-icons/md';
 
 const navItems = [
   {
     label: 'Trang chủ',
     icon: <HomeIcon />,
-    path: '/',
-    key: '/',
+    path: '/home',
+    key: '/home',
   },
   {
-    icon: <HomeIcon />,
+    icon: <RiBook3Line />,
     key: '/overview',
     label: 'Giới thiệu',
     path: '/overview',
   },
   {
-    icon: <HomeIcon />,
+    icon: <RiCalendarEventLine />,
     key: '/sukien',
     label: 'Sự kiện',
     path: '/sukien',
   },
   {
-    icon: <HomeIcon />,
+    icon: <MdOutlineTheaterComedy />,
     key: '/vodien',
     label: 'Vở diễn',
     path: '/vodien',
   },
   {
-    icon: <HomeIcon />,
+    icon: <RiCopperDiamondLine />,
     key: '/giatri',
     label: 'Giá trị',
     path: '/giatri',

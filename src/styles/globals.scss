@@ -2,6 +2,14 @@
 @import 'tailwind/tailwind';
 @import 'common/scrollbar';
 @import 'common/navbar';
+@import 'https://fonts.googleapis.com/css2?family=Tinos&display=swap';
+
+@font-face {
+  font-family: STXinwei;
+  src: url('../styles/fonts/chinese.stxinwei.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 * {
   box-sizing: border-box;
@@ -37,11 +45,11 @@ a {
   width: 720px;
 }
 
-.post-content:deep(.ql-container) {
+.post-content .ql-container {
   height: 160px;
 }
 
-.modal-web:deep(.ql-container.ql-snow) {
+.modal-web .ql-container.ql-snow {
   height: 160px;
 }
 
@@ -66,11 +74,11 @@ a {
   padding: 16px;
 }
 
-.timeline:deep(.ant-timeline-item) {
+.timeline .ant-timeline-item {
   font-size: 16px;
 }
 
-.home :deep(.slick-slide) {
+.home .slick-slide {
   text-align: center;
   height: 520px;
   line-height: 160px;
@@ -78,11 +86,27 @@ a {
   overflow: hidden;
 }
 
-.home :deep(.slick-slide h3) {
+.home .slick-slide h3 {
   color: #fff;
 }
 
 .tab-pane {
   font-size: 18px;
   line-height: 2.5rem;
+}
+
+.sider a {
+  color: #727272;
+}
+
+.sider {
+  .title::after {
+    position: absolute;
+    width: 50px;
+    display: block;
+    height: 4px;
+    bottom: -15px;
+    background-color: #ffd154;
+    content: '';
+  }
 }

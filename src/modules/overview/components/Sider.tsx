@@ -3,10 +3,9 @@ import { message, Select } from 'antd';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import lo from 'lodash';
+import cx from 'classnames';
 
-const tags = ['Sân khâu', 'Buồng trò', 'Quân rối', 'Quân rối', 'Chế tác', 'Địa chỉ'];
-
-export default function Sider() {
+export default function Sider({ className }: { className?: string }) {
   const [recentPost, setRecentPost] = useState([]);
   const [viewsPost, setViewsPost] = useState([]);
   const [postOptions, setPostOptions] = useState([]);
@@ -48,8 +47,8 @@ export default function Sider() {
   }, []);
 
   return (
-    <div className="absolute right-0 top-4 w-[20%] flex flex-col mr-8 gap-8">
-      <div className="p-6 bg-white w-full">
+    <div className={cx('sider w-[20%] flex flex-col py-4 mr-8 gap-8 min-h-[100vh]', { className })}>
+      <div className="bg-white w-full">
         <Select
           className="w-full"
           showSearch
@@ -60,7 +59,7 @@ export default function Sider() {
         ></Select>
       </div>
       <div className="p-6 bg-white">
-        <h1 className="text-3xl font-semibold mb-6">Bài viết gần đây</h1>
+        <h1 className="title mb-8 relative text-3xl font-semibold">Bài viết gần đây</h1>
 
         {recentPost?.map((post, index) => {
           return (
@@ -72,24 +71,11 @@ export default function Sider() {
       </div>
 
       <div className="p-6 bg-white">
-        <h1 className="text-3xl font-semibold mb-6">Bài viết đọc nhiều</h1>
-
+        <h1 className="title mb-8 relative text-3xl font-semibold">Bài viết đọc nhiều</h1>
         {viewsPost?.map((post, index) => {
           return (
             <div key={index} className="border-0 border-solid border-grey-200 border-b p-2 mb-4 text-lg">
               {post?.slug && <Link href={`/overview/${post?.slug}`}>{post?.title}</Link>}
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="p-6 bg-white">
-        <h1 className="text-3xl font-semibold mb-6">Tags</h1>
-
-        {tags?.map((tag, index) => {
-          return (
-            <div key={index} className="border-0 border-solid border-grey-200 border-b p-2 mb-4 text-lg">
-              <a href="">{tag}</a>
             </div>
           );
         })}
