@@ -13,7 +13,7 @@ interface IProps {
     content: string;
     slug: string;
     _id: string;
-    created_at: string;
+    updatedAt: string;
   };
 }
 
@@ -45,7 +45,7 @@ export default function ShortPost(props: IProps) {
         </Dropdown>
         <h1 className="text-3xl font-bold text-center leading-10 mb-4">{props.data?.title}</h1>
         <span className="">
-          {dayjs(props.data?.created_at).format('DD-MM-YYYY')} - Rối nước tế tiêu - 0 Bình luận
+          {dayjs(props.data?.updatedAt).format('DD-MM-YYYY')} - Rối nước tế tiêu - 0 Bình luận
         </span>
         <div className="w-[60px]">
           <Divider className="h-[2px]" />

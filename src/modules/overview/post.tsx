@@ -5,6 +5,8 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { Comment } from '@ant-design/compatible';
 import { useEffect, useState } from 'react';
 import { createComment, getPostDetail } from '@/services/puppetService';
+import { createMarkUp } from './components/ShortPost';
+import Sider from './components/Sider';
 
 dayjs.extend(relativeTime);
 
@@ -53,20 +55,21 @@ export default function Post({ slug }) {
 
   useEffect(() => {
     getPost();
-  }, []);
+  }, [slug]);
 
   return (
-    <>
+    <div className="flex">
       <div className="max-w-[900px] bg-white px-16 pt-8 pb-8 mx-auto mt-8 flex flex-col items-center">
         <h1 className="text-3xl font-bold text-center leading-10 mb-4">{post?.title}</h1>
         <span className="">
-          {dayjs(post?.created_at).format('DD-MM-YYYY')} - Rối nước tế tiêu - 0 Bình luận
+          {dayjs(post?.updatedAt).format('DD-MM-YYYY')} - Rối nước tế tiêu - 0 Bình luận
         </span>
         <div className="w-[60px]">
           <Divider />
         </div>
-        <p className="text-lg leading-10 text-justify mb-8">{post?.content}</p>
-
+        <p className="text-lg leading-10 text-justify mb-8">
+          <div dangerouslySetInnerHTML={createMarkUp(post?.content)}></div>
+        </p>
         <span className="self-start text-xl font-semibold">Comment</span>
         <div className="flex w-full gap-4 mb-6">
           <Input onChange={handleComment} value={comment} placeholder="Để lại comment của bạn" />
@@ -116,6 +119,7 @@ export default function Post({ slug }) {
           );
         })}
       </div>
-    </>
+      <Sider recommend title={post?.title} id={post?._id} />
+    </div>
   );
 }

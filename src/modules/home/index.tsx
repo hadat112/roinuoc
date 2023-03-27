@@ -1,11 +1,34 @@
-import { Button, Carousel } from 'antd';
+import { Carousel, message } from 'antd';
 import { RiDoubleQuotesL, RiDoubleQuotesR } from 'react-icons/ri';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { useEffect, useRef, useState } from 'react';
+import { getPost } from '@/services/puppetService';
+import dayjs from 'dayjs';
+import Link from 'next/link';
 
 export default function Home() {
+  const [posts, setPosts] = useState([]);
+  const carouselPost = useRef();
+  const convertPosts = (arr, chunkSize) => {
+    return arr?.reduce((acc, _, i) => {
+      if (i % chunkSize === 0) {
+        acc.push(arr.slice(i, i + chunkSize));
+      }
+      return acc;
+    }, []);
+  };
+  const getPostList = async () => {
+    const response: any = await getPost({ type: 'post' });
+    if (response.error) return message.error(response.error);
+    setPosts(convertPosts(response.data, 3));
+  };
+
+  useEffect(() => {
+    getPostList();
+  }, []);
   return (
     <div className="home w-full bg-bg-body bg-[#ECEFF1]">
-      <Carousel>
+      <Carousel className="w-full">
         <div>
           <img
             className="block w-[100%] h-[520px] min-h-[520px] max-w-full object-cover"
@@ -58,133 +81,54 @@ export default function Home() {
       </div>
       <div className="flex flex-col items-center bg-white mt-32 p-4">
         <h1>BLOG</h1>
-        <div className="flex items-center">
-          <FaChevronLeft className="text-yellow" />
-          <Carousel className="bg-white flex-1" effect="fade" autoplay>
-            <div>
-              <div className="flex items-center gap-6 w-full justify-center">
-                <div className="max-w-[300px] flex bg-white p-2 flex-col flex-1">
-                  <h3 className="text-base mb-[2px] font-bold text-yellow">
-                    Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
-                  </h3>
-                  <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
-                  <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
-                    Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được
-                    hình thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò
-                    trên sân khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn
-                    cũng như múa rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời
-                    Lý, Trần (thế kỷ XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam”
-                    (1974, trang 37-43), Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung
-                    một lịch sử ra đời. Vào thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được
-                    biểu diễn mừng ngày sinh nhật đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi
-                    giả Vạn Thọ Nam Sơn, các con rối cô tiên múa trong tiếng hát ca, tôn vinh vận nước hưng
-                    thịnh v.v., …
-                  </p>
-                  <Button className="text-yellow border-none self-end outline-none">Xem thêm</Button>
+        <div className="flex items-center max-w-[100vw] mx-auto overflow-hidden relative">
+          <FaChevronLeft
+            className="text-yellow text-3xl cursor-pointer absolute left-[10%] z-10"
+            // onClick={() => carouselPost.current?.prev()}
+          />
+          <Carousel ref={carouselPost} dots={false} className="bg-white min-w-[900px]">
+            {posts?.map((post, index) => {
+              return (
+                <div key={index}>
+                  <div className="home-slide overflow-hidden flex items-start gap-6 justify-center">
+                    {post.map((p) => {
+                      return (
+                        <div key={p?._id} className="max-w-[300px] flex h-full bg-white p-2 flex-col flex-1">
+                          <h3 className="text-base mb-[2px] font-bold text-yellow">{p?.title}</h3>
+                          <p className="text-[12px] mb-3">
+                            {dayjs(p?.updatedAt).format('DD-MM-YYYY MM[h]HH')}
+                          </p>
+                          <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
+                            Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt
+                            đã được hình thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò
+                            và các tích trò trên sân khấu cạn (khác với rối nước là con rối được biểu diễn ở
+                            dưới nước). Múa rối cạn cũng như múa rối nước đã phát triển phong phú và đạt trình
+                            độ nghệ thuật khá cao vào thời Lý, Trần (thế kỷ XI-XII). Trong công trình nghiên
+                            cứu ... “Nghệ thuật múa rối Việt Nam” (1974, trang 37-43), Nguyễn Huy Hồng nhận
+                            định cả múa rối cạn và múa rối nước đều có chung một lịch sử ra đời. Vào thế kỷ XI
+                            (thời Lý), nhiều trò diễn rối cạn và rối nước đã được biểu diễn mừng ngày sinh
+                            nhật đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi giả Vạn Thọ Nam
+                            Sơn, các con rối cô tiên múa trong tiếng hát ca, tôn vinh vận nước hưng thịnh
+                            v.v., …
+                          </p>
+                          <Link
+                            href={`overview/${p?.slug}`}
+                            className="text-yellow border-none text-end outline-none"
+                          >
+                            Xem thêm
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-                <div className="max-w-[300px] flex bg-white p-2 flex-col flex-1">
-                  <h3 className="text-base mb-[2px] font-bold text-yellow">
-                    Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
-                  </h3>
-                  <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
-                  <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
-                    Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được
-                    hình thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò
-                    trên sân khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn
-                    cũng như múa rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời
-                    Lý, Trần (thế kỷ XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam”
-                    (1974, trang 37-43), Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung
-                    một lịch sử ra đời. Vào thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được
-                    biểu diễn mừng ngày sinh nhật đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi
-                    giả Vạn Thọ Nam Sơn, các con rối cô tiên múa trong tiếng hát ca, tôn vinh vận nước hưng
-                    thịnh v.v., …
-                  </p>
-                  <Button className="text-yellow border-none self-end outline-none">Xem thêm</Button>
-                </div>
-                <div className="max-w-[300px] flex bg-white p-2 flex-col flex-1">
-                  <h3 className="text-base mb-[2px] font-bold text-yellow">
-                    Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
-                  </h3>
-                  <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
-                  <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
-                    Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được
-                    hình thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò
-                    trên sân khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn
-                    cũng như múa rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời
-                    Lý, Trần (thế kỷ XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam”
-                    (1974, trang 37-43), Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung
-                    một lịch sử ra đời. Vào thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được
-                    biểu diễn mừng ngày sinh nhật đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi
-                    giả Vạn Thọ Nam Sơn, các con rối cô tiên múa trong tiếng hát ca, tôn vinh vận nước hưng
-                    thịnh v.v., …
-                  </p>
-                  <Button className="text-yellow border-none self-end outline-none">Xem thêm</Button>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center w-full gap-6 justify-center">
-                <div className="max-w-[300px] flex bg-white p-2 flex-col flex-1">
-                  <h3 className="text-base mb-[2px] font-bold text-yellow">
-                    Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
-                  </h3>
-                  <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
-                  <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
-                    Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được
-                    hình thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò
-                    trên sân khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn
-                    cũng như múa rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời
-                    Lý, Trần (thế kỷ XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam”
-                    (1974, trang 37-43), Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung
-                    một lịch sử ra đời. Vào thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được
-                    biểu diễn mừng ngày sinh nhật đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi
-                    giả Vạn Thọ Nam Sơn, các con rối cô tiên múa trong tiếng hát ca, tôn vinh vận nước hưng
-                    thịnh v.v., …
-                  </p>
-                  <Button className="text-yellow border-none self-end outline-none">Xem thêm</Button>
-                </div>
-                <div className="max-w-[300px] flex bg-white p-2 flex-col flex-1">
-                  <h3 className="text-base mb-[2px] font-bold text-yellow">
-                    Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
-                  </h3>
-                  <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
-                  <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
-                    Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được
-                    hình thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò
-                    trên sân khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn
-                    cũng như múa rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời
-                    Lý, Trần (thế kỷ XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam”
-                    (1974, trang 37-43), Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung
-                    một lịch sử ra đời. Vào thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được
-                    biểu diễn mừng ngày sinh nhật đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi
-                    giả Vạn Thọ Nam Sơn, các con rối cô tiên múa trong tiếng hát ca, tôn vinh vận nước hưng
-                    thịnh v.v., …
-                  </p>
-                  <Button className="text-yellow border-none self-end outline-none">Xem thêm</Button>
-                </div>
-                <div className="max-w-[300px] flex bg-white p-2 flex-col flex-1">
-                  <h3 className="text-base mb-[2px] font-bold text-yellow">
-                    Quá trình ra đời và tồn tại của nghệ thuật rối cạn Tế Tiêu
-                  </h3>
-                  <p className="text-[12px] mb-3">06/10/2022 - 10h11</p>
-                  <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
-                    Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt đã được
-                    hình thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò và các tích trò
-                    trên sân khấu cạn (khác với rối nước là con rối được biểu diễn ở dưới nước). Múa rối cạn
-                    cũng như múa rối nước đã phát triển phong phú và đạt trình độ nghệ thuật khá cao vào thời
-                    Lý, Trần (thế kỷ XI-XII). Trong công trình nghiên cứu ... “Nghệ thuật múa rối Việt Nam”
-                    (1974, trang 37-43), Nguyễn Huy Hồng nhận định cả múa rối cạn và múa rối nước đều có chung
-                    một lịch sử ra đời. Vào thế kỷ XI (thời Lý), nhiều trò diễn rối cạn và rối nước đã được
-                    biểu diễn mừng ngày sinh nhật đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi
-                    giả Vạn Thọ Nam Sơn, các con rối cô tiên múa trong tiếng hát ca, tôn vinh vận nước hưng
-                    thịnh v.v., …
-                  </p>
-                  <Button className="text-yellow border-none self-end outline-none">Xem thêm</Button>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </Carousel>
-          <FaChevronRight className="text-yellow" />
+          <FaChevronRight
+            className="text-yellow text-3xl cursor-pointer absolute right-[10%] z-10"
+            // onClick={() => carouselPost.current?.next()}
+          />
         </div>
       </div>
 

@@ -20,7 +20,7 @@ export default function Valuation() {
     <>
       <div className="max-w-[960px] text-left mx-auto text-lg leading-10 my-16 bg-white px-8 py-4">
         <Tabs activeKey={activeKey} onChange={handleChange}>
-          <Tabs.TabPane key="1" tab="Tab 1">
+          <Tabs.TabPane key="1" tab="">
             <p className="Tabs.TabPane">{giatri.lichsu}</p>
           </Tabs.TabPane>
           <Tabs.TabPane key="2" tab="Tab 2" force-render>

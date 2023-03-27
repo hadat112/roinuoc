@@ -5,10 +5,19 @@ import { useEffect, useState } from 'react';
 import lo from 'lodash';
 import cx from 'classnames';
 
-export default function Sider({ className }: { className?: string }) {
+export default function Sider({
+  className,
+}: {
+  className?: string;
+  recommend?: boolean;
+  title?: string;
+  id?: string;
+}) {
   const [recentPost, setRecentPost] = useState([]);
   const [viewsPost, setViewsPost] = useState([]);
   const [postOptions, setPostOptions] = useState([]);
+  // const [recommendPost, setRecommendPost] = useState([]);
+
   const fetchRecentPost = async () => {
     const result: any = await getPost({ type: 'recent' });
     if (result.error) {
@@ -24,6 +33,14 @@ export default function Sider({ className }: { className?: string }) {
     }
     setViewsPost(result.data);
   };
+
+  // const fetchRecommendPost = async () => {
+  //   const result: any = await getPost({ type: 'recommend', title, id });
+  //   if (result.error) {
+  //     message.error(result.error);
+  //   }
+  //   setRecommendPost(result.data);
+  // };
 
   const fetchData = async (params: { text: string }) => {
     const result: { data: any; error?: string } = await searchPost(params);
@@ -46,6 +63,10 @@ export default function Sider({ className }: { className?: string }) {
     fetchViewsPost();
   }, []);
 
+  // useEffect(() => {
+  //   if (recommend && id) fetchRecommendPost();
+  // }, [title]);
+
   return (
     <div className={cx('sider w-[20%] flex flex-col py-4 mr-8 gap-8 min-h-[100vh]', { className })}>
       <div className="bg-white w-full">
@@ -58,6 +79,19 @@ export default function Sider({ className }: { className?: string }) {
           onSearch={handleSearch}
         ></Select>
       </div>
+      {/* {recommend ? (
+        <div className="p-6 bg-white">
+          <h1 className="title mb-8 relative text-3xl font-semibold">Bài viết gần đây</h1>
+
+          {recommendPost?.map((post, index) => {
+            return (
+              <div key={index} className="border-0 border-solid border-grey-200 border-b p-2 mb-4 text-lg">
+                {post?.slug && <Link href={`/overview/${post?.slug}`}>{post?.title}</Link>}
+              </div>
+            );
+          })}
+        </div>
+      ) : null} */}
       <div className="p-6 bg-white">
         <h1 className="title mb-8 relative text-3xl font-semibold">Bài viết gần đây</h1>
 
