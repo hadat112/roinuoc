@@ -5,9 +5,7 @@ const AUTH_API = process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH;
 const api = new ApiClient(AUTH_API).getInstance();
 
 export const getTokenId = () => {
-  const accessTokenObj = JSON.parse(localStorage.getItem('ghtk-token-storage') || '{}');
-  const accessToken =
-    Object.keys(accessTokenObj).length > 0 ? accessTokenObj?.accessToken?.accessToken : null;
+  const accessToken = JSON.parse(localStorage.getItem('token') || '');
   return accessToken;
 };
 
@@ -47,11 +45,7 @@ export const callback = async (nextFn) => {
 
 export const logout = async () => {
   try {
-    // const ghtkAuth = new GhtkAuth(config.oidc);
-    // await ghtkAuth.signOut({
-    //     revokeAccessToken: true,
-    //     postLogoutRedirectUri: `${config.oidc.authnUrl}/sign-out?continue=${config.appUrl}`,
-    // });
+    // const auth
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(e);

@@ -22,7 +22,7 @@ const FallBackUI: React.FC<Props> = ({ error, setError }) => {
       className="w-[80%] mx-auto"
       extra={
         <div className="flex items-center justify-center gap-4">
-          <Button type="primary" target={'_blank'} href={'https://ghtk.me'}>
+          <Button type="primary" target={'_blank'}>
             Report problems
           </Button>
           <Button
