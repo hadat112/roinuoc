@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
-  const carouselPost = useRef();
+  const carouselPost = useRef<any>();
   const convertPosts = (arr, chunkSize) => {
     return arr?.reduce((acc, _, i) => {
       if (i % chunkSize === 0) {
@@ -32,7 +32,7 @@ export default function Home() {
         <div>
           <img
             className="block w-[100%] h-[520px] min-h-[520px] max-w-full object-cover"
-            src="https://lh3.google.com/u/0/d/1Ikd8vPkIM1gEcaxgo88aa4uJJFCGhbwr=w2880-h1642-iv1"
+            src="https://lh3.google.com/u/0/d/1e-_0z-zlrnJfrJIoqhjVsi-j0yHE_17C=w2880-h918-iv1"
             alt=""
           />
         </div>
@@ -58,7 +58,7 @@ export default function Home() {
           />
         </div>
       </Carousel>
-      <div className="font-STXinwei w-[70%] mx-auto mt-12 p-4 bg-white rounded-xl">
+      <div className="font-STXinwei w-[70%] mx-auto mt-32 p-4 bg-white rounded-xl">
         <h1
           className="font-[500] text-2xl text-[#8B4513] relative leading-10"
           style={{ fontFamily: 'Tinos' }}
@@ -74,17 +74,12 @@ export default function Home() {
           <RiDoubleQuotesR className=" text-3xl ml-2" />
         </h1>
       </div>
-      <div className="w-full mx-auto mt-32">
-        <video className="w-full" controls>
-          <source src="https://drive.google.com/uc?id=1JW1PVOYYg5QcGOisqVfuHVFY9N_8vCic" type="video/mp4" />{' '}
-        </video>
-      </div>
       <div className="flex flex-col items-center bg-white mt-32 p-4">
         <h1>BLOG</h1>
         <div className="flex items-center max-w-[100vw] mx-auto overflow-hidden relative">
           <FaChevronLeft
             className="text-yellow text-3xl cursor-pointer absolute left-[10%] z-10"
-            // onClick={() => carouselPost.current?.prev()}
+            onClick={() => carouselPost.current?.prev()}
           />
           <Carousel ref={carouselPost} dots={false} className="bg-white min-w-[900px]">
             {posts?.map((post, index) => {
@@ -127,9 +122,14 @@ export default function Home() {
           </Carousel>
           <FaChevronRight
             className="text-yellow text-3xl cursor-pointer absolute right-[10%] z-10"
-            // onClick={() => carouselPost.current?.next()}
+            onClick={() => carouselPost.current?.next()}
           />
         </div>
+      </div>
+      <div className="w-full mx-auto mt-32">
+        <video className="w-full" controls>
+          <source src="https://drive.google.com/uc?id=1JW1PVOYYg5QcGOisqVfuHVFY9N_8vCic" type="video/mp4" />{' '}
+        </video>
       </div>
 
       <div className="flex px-16 mt-8 pb-8 pt-8"></div>

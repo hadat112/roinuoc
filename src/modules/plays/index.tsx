@@ -66,30 +66,18 @@ export default function Plays() {
           </Button>
         </div>
         <div className="relative">
-          <div className="max-w-[1200px] px-16 pt-8 pb-8 mx-auto mt-8 flex flex-col">
-            <h1 className="text-3xl font-semibold p-4 border-0 border-solid border-grey-700 border-b-4 mb-6">
-              Vở diễn nổi bật
-            </h1>
-            <div className="flex-wrap justify-between items-center flex gap-y-6">
-              <Card hoverable cover={<img alt="example" src="../assets/xaylua.png" />}>
-                <Card.Meta title={<h1 className="text-xl">Trò xay lúa, giã gạo, cày, bừa.</h1>}></Card.Meta>
-              </Card>
-            </div>
+          <div className="max-w-[1200px] px-16 pt-8 pb-8 mx-auto flex flex-col">
             <h1 className="text-3xl font-semibold p-4 border-0 border-solid border-grey-700 border-b-4 mb-6 mt-8">
-              Vở diễn về lịch sử
+              Vở diễn nổi bật
             </h1>
             <div className="flex-wrap justify-between items-center flex gap-y-6">
               {playList?.map((play, index) => {
                 return (
                   <Card
+                    className="max-w-[300px]"
                     key={index}
                     hoverable
-                    cover={
-                      <img
-                        alt="example"
-                        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                      />
-                    }
+                    cover={<img className="max-w-[300px]" alt="example" src={play?.image} />}
                   >
                     <Card.Meta title={<h1 className="text-xl">{play?.name}</h1>}></Card.Meta>
                   </Card>

@@ -20,7 +20,7 @@ export default function CreatePlay({ open, title, onOk, onCancel }: IProps) {
   const handleFinished = () => {
     const values = form.getFieldsValue();
     setPlayState({ title: '', content: '' });
-    onOk({ name: values.title, content: values.content, image: values?.image?.file });
+    onOk({ name: values.title, content: values.content, image: values?.image?.file?.originFileObj });
   };
 
   const Title = (

@@ -20,13 +20,22 @@ export default function Valuation() {
     <>
       <div className="max-w-[960px] text-left mx-auto text-lg leading-10 my-16 bg-white px-8 py-4">
         <Tabs activeKey={activeKey} onChange={handleChange}>
-          <Tabs.TabPane key="1" tab="">
+          <Tabs.TabPane key="1" tab="Lịch sử">
             <p className="Tabs.TabPane">{giatri.lichsu}</p>
           </Tabs.TabPane>
-          <Tabs.TabPane key="2" tab="Tab 2" force-render>
+          <Tabs.TabPane key="2" tab="Giáo dục" force-render>
             <p className="Tabs.TabPane">{giatri.giaoduc}</p>
           </Tabs.TabPane>
-          <Tabs.TabPane key="3" tab="Tab 3">
+          <Tabs.TabPane key="3" tab="Văn hoá">
+            <p className="Tabs.TabPane">{giatri.vanhoa}</p>
+          </Tabs.TabPane>
+          <Tabs.TabPane key="4" tab="Khoa học">
+            <p className="Tabs.TabPane">{giatri.vanhoa}</p>
+          </Tabs.TabPane>
+          <Tabs.TabPane key="5" tab="Kinh tế, du lịch">
+            <p className="Tabs.TabPane">{giatri.vanhoa}</p>
+          </Tabs.TabPane>
+          <Tabs.TabPane key="6" tab="Tính cộng đồng">
             <p className="Tabs.TabPane">{giatri.vanhoa}</p>
           </Tabs.TabPane>
         </Tabs>
