@@ -21,9 +21,9 @@ const navItems = [
   },
   {
     icon: <RiCalendarEventLine />,
-    key: '/sukien',
-    label: 'Sự kiện',
-    path: '/sukien',
+    key: '/lichsu',
+    label: 'Lịch sử',
+    path: '/lichsu',
   },
   {
     icon: <MdOutlineTheaterComedy />,

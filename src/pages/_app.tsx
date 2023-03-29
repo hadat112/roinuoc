@@ -8,27 +8,34 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 import Header from '@/layouts/default/header';
 import Navbar from '@/layouts/default/navbar';
 import DefaultLayout from '@/layouts/default';
+import { ChakraProvider } from '@chakra-ui/react';
+import { store } from '@/store/index';
+import { Provider } from 'react-redux';
 
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }) {
   return (
-    <ConfigProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <ErrorBoundary>
-          <div className="flex flex-col overflow-x-hidden max-h-[100vh]">
-            <main className="flex-1 flex flex-col overflow-y-hidden">
-              <Header>
-                <Navbar />
-              </Header>
-              <DefaultLayout>
-                <Component {...pageProps} />
-              </DefaultLayout>
-            </main>
-          </div>
-        </ErrorBoundary>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </ConfigProvider>
+    <Provider store={store}>
+      <ChakraProvider>
+        <ConfigProvider theme={theme}>
+          <QueryClientProvider client={queryClient}>
+            <ErrorBoundary>
+              <div className="flex flex-col overflow-x-hidden max-h-[100vh]">
+                <main className="flex-1 flex flex-col overflow-y-hidden">
+                  <Header>
+                    <Navbar />
+                  </Header>
+                  <DefaultLayout>
+                    <Component {...pageProps} />
+                  </DefaultLayout>
+                </main>
+              </div>
+            </ErrorBoundary>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </ConfigProvider>
+      </ChakraProvider>
+    </Provider>
   );
 }

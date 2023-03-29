@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
-import { Timeline } from 'antd';
+import { Button, Timeline } from 'antd';
 import { ClockCircleOutlined, ClockCircleFilled } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import cx from 'classnames';
 import { FaRegHandPointRight } from 'react-icons/fa';
+import GameModal from './components/gameModal';
 
 const histories = {
   '1945': [
@@ -158,15 +159,16 @@ const histories = {
 };
 
 export default function History() {
-  const [current] = useState<string>('1945');
+  const [current, setCurrent] = useState<string>('1945');
   const [activeYear, setActiveYear] = useState<number>(0);
+  const [openGame, setOpenGame] = useState<boolean>(false);
 
   useEffect(() => {
     setActiveYear(0);
   }, [current]);
   return (
     <div>
-      <div className="w-full absolute">
+      <div className="w-full relative">
         <h1 className="text-center mx-auto mt-16">Lịch sử phát triển của rối cạn Tế Tiêu</h1>
         <div className="flex mx-auto gap-6 flex-wrap justify-center mt-14">
           <img
@@ -220,7 +222,7 @@ export default function History() {
                   )
                 }
                 className="cursor-pointer"
-                // onClick={() => setCurrent('1945')}
+                onClick={() => setCurrent('1945')}
               >
                 Trước 1945
               </Timeline.Item>
@@ -233,7 +235,7 @@ export default function History() {
                   )
                 }
                 className="cursor-pointer"
-                // onClick={() => setCurrent('1986')}
+                onClick={() => setCurrent('1986')}
               >
                 1945 đến 1986
               </Timeline.Item>
@@ -246,14 +248,18 @@ export default function History() {
                   )
                 }
                 className="cursor-pointer"
-                // onClick={() => setCurrent('2023')}
+                onClick={() => setCurrent('2023')}
               >
                 1986 đến nay
               </Timeline.Item>
             </Timeline>
+            <Button onClick={() => setOpenGame(true)} className="mt-4">
+              Trò chơi
+            </Button>
           </div>
         </div>
       </div>
+      <GameModal open={openGame} onCancel={() => setOpenGame(false)} />
     </div>
   );
 }

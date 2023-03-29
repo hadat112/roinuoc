@@ -1,5 +1,5 @@
-import { getPost, searchPost } from '@/services/puppetService';
-import { message, Select } from 'antd';
+import { getPost } from '@/services/puppetService';
+import { Input, message } from 'antd';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import lo from 'lodash';
@@ -7,15 +7,17 @@ import cx from 'classnames';
 
 export default function Sider({
   className,
+  onSearch,
 }: {
   className?: string;
   recommend?: boolean;
   title?: string;
   id?: string;
+  // eslint-disable-next-line no-unused-vars
+  onSearch?: (value: any) => void;
 }) {
   const [recentPost, setRecentPost] = useState([]);
   const [viewsPost, setViewsPost] = useState([]);
-  const [postOptions, setPostOptions] = useState([]);
   // const [recommendPost, setRecommendPost] = useState([]);
 
   const fetchRecentPost = async () => {
@@ -42,20 +44,8 @@ export default function Sider({
   //   setRecommendPost(result.data);
   // };
 
-  const fetchData = async (params: { text: string }) => {
-    const result: { data: any; error?: string } = await searchPost(params);
-
-    if (result.error) {
-      return message.error(result.error);
-    }
-
-    setPostOptions(result.data);
-  };
-
   const handleSearch = lo.debounce(async (value: string) => {
-    if (value?.length > 1) {
-      await fetchData({ text: value });
-    }
+    onSearch(value);
   }, 500);
 
   useEffect(() => {
@@ -70,14 +60,7 @@ export default function Sider({
   return (
     <div className={cx('sider w-[20%] flex flex-col py-4 mr-8 gap-8 min-h-[100vh]', { className })}>
       <div className="bg-white w-full">
-        <Select
-          className="w-full"
-          showSearch
-          allowClear
-          filterOption={false}
-          options={postOptions}
-          onSearch={handleSearch}
-        ></Select>
+        <Input.Search className="w-full" allowClear onSearch={handleSearch} />
       </div>
       {/* {recommend ? (
         <div className="p-6 bg-white">
