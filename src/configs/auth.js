@@ -18,7 +18,7 @@ export const getRefreshToken = async () => {
   }
   localStorage.setItem('token', res.data?.token);
   localStorage.setItem('refresh_token', res.data?.refreshToken);
-  return res.data?.refreshToken;
+  return res.data?.token;
 };
 
 export const login = (nextFn = () => {}) => {
