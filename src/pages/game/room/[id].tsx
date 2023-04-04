@@ -1,4 +1,4 @@
-import { Heading, Center, VStack, Button, Badge, Tooltip, Spinner } from '@chakra-ui/react';
+import { Center, VStack, Spinner } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import GameView from '@/components/GameView/index';
@@ -6,8 +6,9 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { setSocketID } from '@/store/user';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { Tooltip, Badge, Button } from 'antd';
 
-const ENDPOINT = 'http://localhost:5001';
+const ENDPOINT = 'http://localhost:4001';
 
 let socket;
 
@@ -85,7 +86,7 @@ const GameRoom = () => {
   return (
     <Center bg="#151515" minH="100vh">
       <VStack spacing="1rem" color="white">
-        <Heading color="#5582ac">Game Room</Heading>
+        <h1 className="text-text-game text-3xl">Phòng chơi</h1>
         <p>
           Game ID:{' '}
           <CopyToClipboard
@@ -97,11 +98,11 @@ const GameRoom = () => {
               }, 1000);
             }}
           >
-            <Button colorScheme="teal" variant="outline">
+            <Button className="bg-none text-teal rounded-[16px] border-2 border-solid border-teal hover:text-teal hover:bg-teal-50">
               {id}
             </Button>
           </CopyToClipboard>
-          <Tooltip label="Copied!" placement="right-end" isOpen={isCopied}>
+          <Tooltip title="Copied!" placement="bottomRight" open={isCopied}>
             <span />
           </Tooltip>
         </p>
@@ -110,19 +111,20 @@ const GameRoom = () => {
         )}
         {isSocketJoined && (
           <>
-            <p>Users in room:</p>
+            <p>Người chơi trong phòng:</p>
             {users.length > 0 &&
               users.map((user) => (
                 <p key={user.id}>
                   {user.name}{' '}
-                  <Badge ml="1" colorScheme={user.isReady ? 'green' : 'orange'}>
-                    {user.isReady ? 'Ready' : 'Pending'}
-                  </Badge>
+                  <Badge
+                    count={user.isReady ? 'Ready' : 'Pending'}
+                    color="user.isReady ? 'green' : 'orange'"
+                  />
                 </p>
               ))}
             {gameStatus === 'pending' && (
-              <Button colorScheme="yellow" variant="solid" disabled={isReady} onClick={sendReadyStatus}>
-                {isReady ? 'Waiting for players' : 'Ready'}
+              <Button className="border-none !bg-[#ECC94B]" disabled={isReady} onClick={sendReadyStatus}>
+                {isReady ? 'Chờ các người chơi' : 'Ready'}
               </Button>
             )}
             {gameStatus === 'started' && (
@@ -135,15 +137,14 @@ const GameRoom = () => {
             )}
             {gameStatus === 'ended' && (
               <>
-                <Heading size="md">Game Ended</Heading>
+                <h1 className="text-md">Game đã kết thúc</h1>
                 <Button
-                  colorScheme="yellow"
-                  variant="solid"
+                  className="border-none !bg-[#ECC94B]"
                   onClick={() => {
-                    router.replace('/');
+                    router.replace('/game');
                   }}
                 >
-                  Play Again
+                  Chơi lại
                 </Button>
               </>
             )}

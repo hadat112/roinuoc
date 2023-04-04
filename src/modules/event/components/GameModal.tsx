@@ -47,7 +47,7 @@ export default function GameModal({ open, onCancel }) {
     </>
   );
   return (
-    <Modal height width={'90%'} open={open} closable={false} onCancel={onCancel} footer={null} title={title}>
+    <Modal width={'90%'} open={open} closable={false} onCancel={onCancel} footer={null} title={title}>
       <Game question={QUESTION}></Game>
     </Modal>
   );

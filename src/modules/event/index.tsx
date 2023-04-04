@@ -4,7 +4,7 @@ import { ClockCircleOutlined, ClockCircleFilled } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import cx from 'classnames';
 import { FaRegHandPointRight } from 'react-icons/fa';
-import GameModal from './components/gameModal';
+import GameModal from './components/GameModal';
 
 const histories = {
   '1945': [
@@ -159,7 +159,7 @@ const histories = {
 };
 
 export default function History() {
-  const [current, setCurrent] = useState<string>('1945');
+  const [current] = useState<string>('1945');
   const [activeYear, setActiveYear] = useState<number>(0);
   const [openGame, setOpenGame] = useState<boolean>(false);
 
@@ -222,7 +222,7 @@ export default function History() {
                   )
                 }
                 className="cursor-pointer"
-                onClick={() => setCurrent('1945')}
+                // onClick={() => setCurrent('1945')}
               >
                 Trước 1945
               </Timeline.Item>
@@ -235,7 +235,7 @@ export default function History() {
                   )
                 }
                 className="cursor-pointer"
-                onClick={() => setCurrent('1986')}
+                // onClick={() => setCurrent('1986')}
               >
                 1945 đến 1986
               </Timeline.Item>
@@ -248,7 +248,7 @@ export default function History() {
                   )
                 }
                 className="cursor-pointer"
-                onClick={() => setCurrent('2023')}
+                // onClick={() => setCurrent('2023')}
               >
                 1986 đến nay
               </Timeline.Item>

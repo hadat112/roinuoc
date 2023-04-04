@@ -4,7 +4,7 @@ import QuestionTransition from '../Question/QuestionTransition';
 import { parseEntities } from '../Question/Option';
 import Timer from '../Question/Timer';
 import LeaderboardTable from './LeaderboardTable';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@/store/hook';
 
 const getCurrentUserAnswer = (currentUserSocketID, playersList, currentQnID, currentQnNo, questionsList) => {
   const currentPlayer = playersList.find((player) => player.id === currentUserSocketID);
@@ -28,7 +28,7 @@ const getCurrentUserAnswer = (currentUserSocketID, playersList, currentQnID, cur
 };
 
 const GameView = ({ selectedAnswer, selectOption, gameState, leaderboard }) => {
-  const { socketID } = useSelector((state) => state.user);
+  const { socketID } = useAppSelector((state) => state.user);
 
   const questionRoundStatus = gameState.questionRoundStatus;
   return (
@@ -60,7 +60,7 @@ const GameView = ({ selectedAnswer, selectOption, gameState, leaderboard }) => {
       {questionRoundStatus === 'ended' && (
         <div>
           <Heading size="md">
-            Your Answer:{' '}
+            Câu trả lời của bạn:{' '}
             {gameState.currentQuestionNo <= gameState.questions.length &&
               parseEntities(
                 getCurrentUserAnswer(
@@ -73,7 +73,7 @@ const GameView = ({ selectedAnswer, selectOption, gameState, leaderboard }) => {
               )}
           </Heading>
           <Heading size="md" mb="1rem">
-            Correct Answer:{' '}
+            Câu trả lời đúng:{' '}
             {gameState.currentQuestionNo <= gameState.questions.length &&
               parseEntities(
                 gameState.questions[gameState.currentQuestionNo - 1].options.find(

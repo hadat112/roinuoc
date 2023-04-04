@@ -1,82 +1,70 @@
-import {
-  Heading,
-  Center,
-  Button,
-  VStack,
-  FormControl,
-  FormLabel,
-  Input,
-  Tabs,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-} from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { setName } from '@/store/user';
 import randomWords from 'random-words';
 import { useRouter } from 'next/router';
+import { Form, Input, Button, Tabs, TabsProps } from 'antd';
 
 const Home = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   // Event Handlers
-  const createGameHandler = (event) => {
-    event.preventDefault();
-    const name = event.target.name.value;
+  const createGameHandler = (values) => {
+    const name = values.name;
     dispatch(setName(name));
     const randomRoomID = randomWords(3).join('-');
     router.push(`/game/room/${randomRoomID}`);
   };
 
-  const joinGameHandler = (event) => {
-    event.preventDefault();
-    const name = event.target.name.value;
-    const gameID = event.target.gameID.value;
+  const joinGameHandler = (values) => {
+    const name = values.name;
+    const gameID = values.gameID;
     dispatch(setName(name));
     router.push(`/game/room/${gameID}`);
   };
 
+  const items: TabsProps['items'] = [
+    {
+      key: '1',
+      label: 'Tạo phòng',
+      children: (
+        <Form layout="vertical" onFinish={createGameHandler}>
+          <Form.Item id="name" label="Nhập tên của bạn" required name="name">
+            <Input className="text-text-game" />
+          </Form.Item>
+          <Form.Item>
+            <Button className="border-none !bg-[#ECC94B]" htmlType="submit">
+              Tạo
+            </Button>
+          </Form.Item>
+        </Form>
+      ),
+    },
+    {
+      key: '2',
+      label: 'Vào phòng',
+      children: (
+        <Form layout="vertical" onFinish={joinGameHandler}>
+          <Form.Item id="gameID" required label="Game ID" name="gameID">
+            <Input className="text-text-game" />
+          </Form.Item>
+          <Form.Item id="name" required label="Nhập tên của bạn" name="name">
+            <Input className="text-text-game" />
+          </Form.Item>
+          <Form.Item>
+            <Button className="border-none !bg-[#ECC94B]" htmlType="submit">
+              Vào
+            </Button>
+          </Form.Item>
+        </Form>
+      ),
+    },
+  ];
+
   return (
-    <Center bg="#151515" minH="100vh">
-      <VStack spacing="1rem">
-        <Heading color="#5582ac">Multiplayer Trivia</Heading>
-        <Tabs variant="soft-rounded" colorScheme="yellow">
-          <TabList>
-            <Tab>New Game</Tab>
-            <Tab>Join Game</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <form onSubmit={createGameHandler}>
-                <FormControl id="name" isRequired name="name">
-                  <FormLabel color="#5582ac">Your name</FormLabel>
-                  <Input color="#5582ac" />
-                </FormControl>
-                <Button mt="1rem" colorScheme="yellow" variant="solid" type="submit">
-                  Create
-                </Button>
-              </form>
-            </TabPanel>
-            <TabPanel>
-              <form onSubmit={joinGameHandler}>
-                <FormControl id="gameID" isRequired name="gameID">
-                  <FormLabel color="#5582ac">Game ID</FormLabel>
-                  <Input color="#5582ac" />
-                </FormControl>
-                <FormControl id="name" isRequired name="name">
-                  <FormLabel color="#5582ac">Your name</FormLabel>
-                  <Input color="#5582ac" />
-                </FormControl>
-                <Button mt="1rem" colorScheme="yellow" variant="solid" type="submit">
-                  Join
-                </Button>
-              </form>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </VStack>
-    </Center>
+    <div className="game mx-auto w-full justify-center min-h-[100vh] items-center bg-[#151515] flex flex-col">
+      <h1 className="text-3xl mb-16 text-text-game">Game</h1>
+      <Tabs defaultActiveKey="1" items={items} type="card" />
+    </div>
   );
 };
 

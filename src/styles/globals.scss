@@ -107,3 +107,26 @@ a {
   color: #ffd154;
   text-align: end;
 }
+
+.game label.ant-form-item-required {
+  color: #5582ac;
+}
+
+.game .ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab-active {
+  color: #975a16 !important;
+  background: #fefcbf;
+  border: none;
+}
+
+.game .ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab-btn {
+  color: #4a5568 !important;
+}
+
+.game .ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #975a16 !important;
+}
+
+.game .ant-tabs-tab {
+  width: 50%;
+  justify-content: center;
+}
