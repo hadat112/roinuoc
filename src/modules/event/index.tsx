@@ -253,7 +253,7 @@ export default function History() {
                 1986 đến nay
               </Timeline.Item>
             </Timeline>
-            <Button onClick={() => setOpenGame(true)} className="mt-4">
+            <Button href="/game" className="mt-4">
               Trò chơi
             </Button>
           </div>

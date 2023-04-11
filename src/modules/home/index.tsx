@@ -1,6 +1,8 @@
 import { Carousel, message } from 'antd';
-import { RiDoubleQuotesL, RiDoubleQuotesR } from 'react-icons/ri';
+import { RiDoubleQuotesL, RiDoubleQuotesR, RiBus2Line } from 'react-icons/ri';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { TiLocation } from 'react-icons/ti';
+import { GiPathDistance } from 'react-icons/gi';
 import { useEffect, useRef, useState } from 'react';
 import { getPost } from '@/services/puppetService';
 import dayjs from 'dayjs';
@@ -59,11 +61,12 @@ export default function Home() {
         </div>
       </Carousel>
       <div className="font-STXinwei w-[70%] mx-auto mt-32 p-4 bg-white rounded-xl">
+        <h1 className="text-3xl flex w-full justify-center">Rối cạn Tế Tiêu</h1>
         <h1
           className="font-[500] text-2xl text-[#8B4513] relative leading-10"
           style={{ fontFamily: 'Tinos' }}
         >
-          <RiDoubleQuotesL className=" text-3xl mr-2" />
+          <RiDoubleQuotesL className="inline-block text-3xl mr-2" />
           Rối cạn Tế Tiêu là một loại hình nghệ thuật sân khấu dân gian truyền thống của Việt Nam, nổi tiếng
           với các màn múa rối đẹp mắt và kịch tính. Nghệ thuật này được coi là biểu tượng của văn hoá dân gian
           Việt Nam và là một phần không thể thiếu trong các lễ hội truyền thống của đất nước. Nghệ thuật rối
@@ -71,8 +74,25 @@ export default function Home() {
           đa dạng và phong phú, thể hiện rõ nét các cảnh vật, nhân vật và tình huống khác nhau trong cuộc
           sống. Với giá trị giải trí, giáo dục và giáo dục đạo đức cho người xem, nghệ thuật rối cạn Tế Tiêu
           là một phần quan trọng của văn hoá dân gian Việt Nam.
-          <RiDoubleQuotesR className=" text-3xl ml-2" />
+          <RiDoubleQuotesR className="inline-block text-3xl ml-2" />
         </h1>
+      </div>
+      <div className="flex w-[70%] mx-auto justify-between mt-32 bg-white p-4 rounded-xl gap-8">
+        <div className="flex-1 font-[700] flex flex-col text-3xl">
+          <span className=" flex justify-center w-full">Địa chỉ</span>
+          <span className="text-lg flex-1 flex gap-2 mt-2 items-center">
+            <TiLocation className="text-4xl text-yellow w-[60px]" /> Làng Tế Tiêu, thị trấn Đại Nghĩa, huyện
+            Mỹ Đức, thành phố Hà Nội
+          </span>
+          <span className="text-lg flex-1 flex gap-2 mt-2 items-center">
+            <GiPathDistance className="text-4xl text-yellow w-[40px]" /> Khoảng cách từ trung tâm thành phố:
+            44km
+          </span>
+          <span className="text-lg flex-1 flex gap-2 mt-2 items-center">
+            <RiBus2Line className="text-4xl text-yellow w-[40px]" /> Một số tuyến xe bus: 78, 211
+          </span>
+        </div>
+        <img src="/map.png" className="max-w-[60%] border-primary border border-solid rounded-xl" alt="" />
       </div>
       <div className="flex flex-col items-center bg-white mt-32 p-4">
         <h1>BLOG</h1>
@@ -94,17 +114,7 @@ export default function Home() {
                             {dayjs(p?.updatedAt).format('DD-MM-YYYY MM[h]HH')}
                           </p>
                           <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
-                            Ở nước ta, rối cạn là loại hình nghệ thuật truyền thống, là đặc sản văn hóa Việt
-                            đã được hình thành từ bao đời nay, với đặc trưng sử dụng con rối biểu diễn các trò
-                            và các tích trò trên sân khấu cạn (khác với rối nước là con rối được biểu diễn ở
-                            dưới nước). Múa rối cạn cũng như múa rối nước đã phát triển phong phú và đạt trình
-                            độ nghệ thuật khá cao vào thời Lý, Trần (thế kỷ XI-XII). Trong công trình nghiên
-                            cứu ... “Nghệ thuật múa rối Việt Nam” (1974, trang 37-43), Nguyễn Huy Hồng nhận
-                            định cả múa rối cạn và múa rối nước đều có chung một lịch sử ra đời. Vào thế kỷ XI
-                            (thời Lý), nhiều trò diễn rối cạn và rối nước đã được biểu diễn mừng ngày sinh
-                            nhật đức vua Lý Thái Tổ. Các con rối chim bay, muông chạy ở núi giả Vạn Thọ Nam
-                            Sơn, các con rối cô tiên múa trong tiếng hát ca, tôn vinh vận nước hưng thịnh
-                            v.v., …
+                            {p?.content}
                           </p>
                           <Link
                             href={`overview/${p?.slug}`}

@@ -10,7 +10,7 @@ const QuestionTransition = ({ questionNo, duration }) => {
       });
     }, 1000);
   }, []);
-  return <Heading size="lg">{`Qn ${questionNo} starting in ${timeLeft} seconds`}</Heading>;
+  return <Heading size="lg">{`Câu hỏi ${questionNo} bắt đầu sau ${timeLeft} giây`}</Heading>;
 };
 
 export default QuestionTransition;

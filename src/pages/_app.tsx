@@ -3,6 +3,7 @@ import theme from '@/configs/antd';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import 'antd/dist/reset.css';
+import 'react-quill/dist/quill.snow.css';
 import '@/styles/globals.scss';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import Header from '@/layouts/default/header';

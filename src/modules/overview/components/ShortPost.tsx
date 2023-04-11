@@ -4,10 +4,13 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { marked } from 'marked';
 import dayjs from 'dayjs';
+import CreatePost from './CreatePost';
 
 interface IProps {
   // eslint-disable-next-line no-unused-vars
   handleDelete: (id: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  handleUpdate: (id: string, title: string, content: string) => void;
   data: {
     title: string;
     content: string;
@@ -24,15 +27,25 @@ export const createMarkUp = (val) => {
 export default function ShortPost(props: IProps) {
   const items: MenuProps['items'] = [
     {
-      label: <div onClick={() => setDeleteState({ open: true })}>Delete</div>,
+      label: <div onClick={() => setDeleteState({ open: true })}>Xoá</div>,
       key: 0,
+    },
+    {
+      label: <div onClick={() => setUpdateState({ open: true })}>Chỉnh sửa</div>,
+      key: 1,
     },
   ];
   const [deleteState, setDeleteState] = useState({ open: false });
+  const [updateState, setUpdateState] = useState({ open: false });
 
   const handleDelete = async () => {
     props.handleDelete(props.data?._id);
     setDeleteState({ open: false });
+  };
+
+  const handleUpdate = async (title, content) => {
+    props.handleUpdate(props.data?._id, title, content);
+    setUpdateState({ open: false });
   };
 
   return (
@@ -57,6 +70,13 @@ export default function ShortPost(props: IProps) {
           <Link href={`/overview/${props.data?.slug}` || '/'}> Đọc thêm </Link>
         </Button>
       </div>
+      <CreatePost
+        title={props?.data?.title}
+        content={props?.data?.content}
+        onCancel={() => setUpdateState({ open: false })}
+        onOk={handleUpdate}
+        visible={updateState.open}
+      />
       <Modal
         open={deleteState.open}
         className="modal-web"

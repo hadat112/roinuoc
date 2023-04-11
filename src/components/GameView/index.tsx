@@ -13,7 +13,7 @@ const getCurrentUserAnswer = (currentUserSocketID, playersList, currentQnID, cur
   } else {
     const playerAnswer = currentPlayer.answers[currentQnID];
     if (playerAnswer === undefined) {
-      return 'No answer submitted';
+      return 'Không có đáp án';
     } else {
       const playerAnsweredOption = questionsList[currentQnNo - 1].options.find(
         (option) => option.id === playerAnswer.answerID
@@ -39,7 +39,7 @@ const GameView = ({ selectedAnswer, selectOption, gameState, leaderboard }) => {
       {questionRoundStatus === 'started' && (
         <>
           <Timer duration={gameState.duration} />
-          <Heading>Qn {gameState.currentQuestionNo}</Heading>
+          <Heading>Câu {gameState.currentQuestionNo}</Heading>
           <Heading>{parseEntities(gameState.questions[gameState.currentQuestionNo - 1].payload)}</Heading>
           <HStack spacing="1rem">
             {gameState.questions[gameState.currentQuestionNo - 1].options.map((option, index) => (
@@ -48,7 +48,7 @@ const GameView = ({ selectedAnswer, selectOption, gameState, leaderboard }) => {
                 index={index}
                 content={option.payload}
                 onClickHandler={() => {
-                  if (selectedAnswer !== null) return;
+                  // if (selectedAnswer !== null) return;
                   selectOption({ answerID: option.id });
                 }}
                 isSelected={option.id === selectedAnswer}

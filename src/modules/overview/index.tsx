@@ -1,4 +1,4 @@
-import { createPost, deletePost, getPost, searchPost } from '@/services/puppetService';
+import { createPost, deletePost, getPost, searchPost, updatePost } from '@/services/puppetService';
 import { Input, Button, message, Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import CreatePost from '../../modules/overview/components/CreatePost';
@@ -10,6 +10,7 @@ export default function Overview() {
   const [post, setPost] = useState<any>();
   const [fetching, setFetching] = useState(false);
   function removeAccents(str) {
+    if (!str) return;
     return str
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
@@ -38,9 +39,34 @@ export default function Overview() {
     const result: any = await deletePost({ id });
     if (result.error) return message.error(result.error);
 
-    const newPost = post.filter((post) => post._id !== id);
+    const newPost = post.filter((post) => post?._id !== id);
 
     setPost(newPost);
+  };
+
+  const handleUpdatePost = async (id: string, title: string, content: string) => {
+    const dataForm = {
+      title,
+      content,
+      id,
+      slug: removeAccents(title).toLocaleLowerCase().split(' ').join('-'),
+      type: 'overview',
+    };
+
+    const result: any = await updatePost(dataForm);
+
+    if (result.error) {
+      setModalState({ open: false });
+      return message.error(result.error);
+    }
+
+    const newPosts = post.map((post) => {
+      if (post?._id !== id) return post;
+      return { ...post, title, content };
+    });
+
+    setPost(newPosts);
+    setModalState({ open: false });
   };
 
   const getPostList = async () => {
@@ -83,8 +109,8 @@ export default function Overview() {
         <Spin spinning={fetching}>
           {post?.map((post) => {
             return (
-              <div key={post._id} className="w-full flex-1">
-                <ShortPost handleDelete={handleDeletePost} data={post} />
+              <div key={post?._id} className="w-full flex-1">
+                <ShortPost handleUpdate={handleUpdatePost} handleDelete={handleDeletePost} data={post} />
               </div>
             );
           })}

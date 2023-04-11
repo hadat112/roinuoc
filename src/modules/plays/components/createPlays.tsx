@@ -1,5 +1,5 @@
 import { UploadOutlined } from '@ant-design/icons';
-import { Modal, Button, Input, Form, Upload } from 'antd';
+import { Modal, Button, Input, Form, Upload, message } from 'antd';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 // import { QuillEditor as DEditor } from "@vueup/vue-quill";
@@ -20,6 +20,7 @@ export default function CreatePlay({ open, title, onOk, onCancel }: IProps) {
   const handleFinished = () => {
     const values = form.getFieldsValue();
     setPlayState({ title: '', content: '' });
+    if (!values.title || !values.content) return message.error('Bạn cần điền đầy đủ các trường!');
     onOk({ name: values.title, content: values.content, image: values?.image?.file?.originFileObj });
   };
 

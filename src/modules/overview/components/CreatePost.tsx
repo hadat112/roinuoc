@@ -1,6 +1,6 @@
-import { Modal, Button, Input, Form } from 'antd';
+import { Modal, Button, Input, Form, message } from 'antd';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { QuillEditor as DEditor } from "@vueup/vue-quill";
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
@@ -8,17 +8,21 @@ import 'react-quill/dist/quill.snow.css';
 interface IProps {
   visible?: boolean;
   title?: string;
+  content?: string;
   // eslint-disable-next-line no-unused-vars
   onOk?: (title?: string, content?: string) => void;
   onCancel?: () => void;
 }
 
-export default function CreatePost({ visible, title, onOk, onCancel }: IProps) {
+export default function CreatePost({ visible, title, content, onOk, onCancel }: IProps) {
   const [postState, setPostState] = useState<{ title: string; content: string }>();
-
+  const [form] = Form.useForm();
   const handleFinished = () => {
+    const newTitle = form.getFieldValue('title');
+    const newContent = form.getFieldValue('content');
+    if (!newTitle || !newContent) return message.error('Bạn cần điền đầy đủ các trường!');
+    onOk(newTitle, newContent);
     setPostState({ title: '', content: '' });
-    onOk(postState.title, postState.content);
   };
 
   const handleChangeTitle = (value) => {
@@ -45,21 +49,21 @@ export default function CreatePost({ visible, title, onOk, onCancel }: IProps) {
     </div>
   );
 
+  useEffect(() => {
+    if (content && visible) {
+      form.setFieldsValue({ title, content });
+    }
+  }, [visible]);
+
   return (
     <Modal open={visible} onCancel={onCancel} className="modal-web" width="720" title={Title} footer={Footer}>
-      <Form>
-        <Form.Item name="title">
-          <Input
-            defaultValue={title}
-            onChange={handleChangeTitle}
-            value={postState?.title}
-            className="mb-6"
-            placeholder="Title"
-          />
+      <Form form={form}>
+        <Form.Item rules={[{ required: true, message: 'Vui lòng nhập tiêu đề' }]} name="title">
+          <Input onChange={handleChangeTitle} value={postState?.title} className="mb-6" placeholder="Title" />
         </Form.Item>
         <div className="post-content">
           <Form.Item name="content">
-            <ReactQuill value={postState?.content} onChange={handleChangeContent} />
+            <ReactQuill theme="snow" value={postState?.content} onChange={handleChangeContent} />
           </Form.Item>
         </div>
       </Form>
