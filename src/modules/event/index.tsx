@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import cx from 'classnames';
 import { FaRegHandPointRight } from 'react-icons/fa';
 import GameModal from './components/GameModal';
+import { useAppSelector } from '@/store/hook';
 
 const histories = {
   '1945': [
@@ -159,10 +160,10 @@ const histories = {
 };
 
 export default function History() {
-  const [current] = useState<string>('1945');
+  const [current, setCurrent] = useState<string>('1945');
   const [activeYear, setActiveYear] = useState<number>(0);
   const [openGame, setOpenGame] = useState<boolean>(false);
-
+  const { role } = useAppSelector((state) => state.auth);
   useEffect(() => {
     setActiveYear(0);
   }, [current]);
@@ -222,7 +223,7 @@ export default function History() {
                   )
                 }
                 className="cursor-pointer"
-                // onClick={() => setCurrent('1945')}
+                onClick={() => setCurrent('1945')}
               >
                 Trước 1945
               </Timeline.Item>
@@ -235,7 +236,7 @@ export default function History() {
                   )
                 }
                 className="cursor-pointer"
-                // onClick={() => setCurrent('1986')}
+                onClick={() => setCurrent('1986')}
               >
                 1945 đến 1986
               </Timeline.Item>
@@ -248,7 +249,7 @@ export default function History() {
                   )
                 }
                 className="cursor-pointer"
-                // onClick={() => setCurrent('2023')}
+                onClick={() => setCurrent('2023')}
               >
                 1986 đến nay
               </Timeline.Item>
@@ -256,6 +257,11 @@ export default function History() {
             <Button href="/game" className="mt-4">
               Trò chơi
             </Button>
+            {role === 112 && (
+              <Button href="/questions" className="mt-4">
+                Quản lý câu hỏi
+              </Button>
+            )}
           </div>
         </div>
       </div>

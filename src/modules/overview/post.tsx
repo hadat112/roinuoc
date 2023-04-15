@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 import { createComment, getPostDetail } from '@/services/puppetService';
 import { createMarkUp } from './components/ShortPost';
 import Sider from './components/Sider';
+import { useAppSelector } from '@/store/hook';
+import LoginRequest from '@/components/LoginRequest';
 
 dayjs.extend(relativeTime);
 
@@ -17,6 +19,8 @@ export default function Post({ slug }) {
   const [post, setPost] = useState<any>();
   const [comment, setComment] = useState<string>();
   const [comments, setComments] = useState<any>();
+  const [open, setOpen] = useState<boolean>();
+  const { username } = useAppSelector((state) => state.auth);
 
   //   const onLike = () => {
   //     setLikes(1);
@@ -35,6 +39,12 @@ export default function Post({ slug }) {
   };
 
   const handleSendComment = async () => {
+    if (!comment) return message.error('Vui lòng nhập bình luận');
+
+    if (!username) {
+      setOpen(true);
+      return;
+    }
     const result: any = await createComment({
       post_id: post._id,
       content: comment,
@@ -120,6 +130,7 @@ export default function Post({ slug }) {
         })}
       </div>
       <Sider recommend title={post?.title} id={post?._id} />
+      <LoginRequest open={open} onCancel={() => setOpen(false)} />
     </div>
   );
 }

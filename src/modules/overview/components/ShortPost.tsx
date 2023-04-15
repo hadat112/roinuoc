@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { marked } from 'marked';
 import dayjs from 'dayjs';
 import CreatePost from './CreatePost';
+import { useAppSelector } from '@/store/hook';
 
 interface IProps {
   // eslint-disable-next-line no-unused-vars
@@ -25,6 +26,8 @@ export const createMarkUp = (val) => {
 };
 
 export default function ShortPost(props: IProps) {
+  const { role } = useAppSelector((state) => state.auth);
+
   const items: MenuProps['items'] = [
     {
       label: <div onClick={() => setDeleteState({ open: true })}>Xoá</div>,
@@ -51,11 +54,13 @@ export default function ShortPost(props: IProps) {
   return (
     <>
       <div className="max-w-[900px] bg-white px-16 pt-8 pb-8 mx-auto mt-8 flex flex-col items-center relative">
-        <Dropdown menu={{ items }}>
-          <span className="text-2xl absolute top-3 right-4 cursor-pointer hover:bg-bg-body rounded-full p-1 w-[36px] h-[36px] flex items-center justify-center text-center">
-            <EllipsisOutlined />
-          </span>
-        </Dropdown>
+        {role === 112 && (
+          <Dropdown menu={{ items }}>
+            <span className="text-2xl absolute top-3 right-4 cursor-pointer hover:bg-bg-body rounded-full p-1 w-[36px] h-[36px] flex items-center justify-center text-center">
+              <EllipsisOutlined />
+            </span>
+          </Dropdown>
+        )}
         <h1 className="text-3xl font-bold text-center leading-10 mb-4">{props.data?.title}</h1>
         <span className="">
           {dayjs(props.data?.updatedAt).format('DD-MM-YYYY')} - Rối nước tế tiêu - 0 Bình luận

@@ -1,4 +1,7 @@
 import { login, register } from '@/services/auth';
+import { getUserInfo } from '@/services/puppetService';
+import { setUserName } from '@/store/auth';
+import { useAppDispatch } from '@/store/hook';
 import { Input, Button, Checkbox, Form, message } from 'antd';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -6,6 +9,14 @@ import { useState } from 'react';
 export default function Login() {
   const [type, setType] = useState<boolean>(true);
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const getAuth = async () => {
+    const result: any = await getUserInfo();
+    if (result.error) message.error(result.error);
+    dispatch(setUserName(result.data));
+  };
+
   const handleFinish = async (values) => {
     if (!values || !values?.username || !values?.password)
       return message.error('Bạn cần điền đầy đủ tên đăng nhập và mật khẩu');
@@ -23,6 +34,7 @@ export default function Login() {
       localStorage.setItem('token', result?.data?.token);
       localStorage.setItem('refresh_token', result?.data?.refreshToken);
     }
+    getAuth();
 
     router.push('/');
   };

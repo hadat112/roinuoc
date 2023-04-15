@@ -3,10 +3,12 @@ import { Button, Card, Input, message } from 'antd';
 // import Sider from '../overview/components/Sider';
 import { useEffect, useState } from 'react';
 import CreatePlay from './components/createPlays';
+import { useAppSelector } from '@/store/hook';
 
 export default function Plays() {
   const [playList, setPlayList] = useState([]);
   const [modalState, setModalState] = useState({ open: false });
+  const { role } = useAppSelector((state) => state.auth);
 
   async function getPlayList() {
     const response: any = await getPlays();
@@ -59,12 +61,14 @@ export default function Plays() {
   return (
     <>
       <div className="home w-full bg-white">
-        <div className="max-w-[900px] w-full flex gap-4 mx-auto mt-4">
-          <Input />
-          <Button className="text-2xl leading-5" onClick={() => setModalState({ open: true })}>
-            +
-          </Button>
-        </div>
+        {role === 112 && (
+          <div className="max-w-[900px] w-full flex gap-4 mx-auto mt-4">
+            <Input />
+            <Button className="text-2xl leading-5" onClick={() => setModalState({ open: true })}>
+              +
+            </Button>
+          </div>
+        )}
         <div className="relative">
           <div className="max-w-[1200px] px-16 pt-8 pb-8 mx-auto flex flex-col">
             <h1 className="text-3xl font-semibold p-4 border-0 border-solid border-grey-700 border-b-4 mb-6 mt-8">

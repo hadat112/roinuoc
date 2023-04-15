@@ -4,11 +4,14 @@ import { useEffect, useState } from 'react';
 import CreatePost from '../../modules/overview/components/CreatePost';
 import ShortPost from '../../modules/overview/components/ShortPost';
 import Sider from '../../modules/overview/components/Sider';
+import { useAppSelector } from '@/store/hook';
 
 export default function Overview() {
   const [modalState, setModalState] = useState({ open: false });
   const [post, setPost] = useState<any>();
   const [fetching, setFetching] = useState(false);
+  const { role } = useAppSelector((state) => state.auth);
+
   function removeAccents(str) {
     if (!str) return;
     return str
@@ -100,12 +103,14 @@ export default function Overview() {
   return (
     <div className="flex bg-[#ECEFF1]">
       <div className="flex flex-col flex-1 w-full p-4">
-        <div className="max-w-[900px] w-full flex gap-4 mx-auto">
-          <Input />
-          <Button className="text-2xl leading-5" onClick={() => setModalState({ open: true })}>
-            +
-          </Button>
-        </div>
+        {role === 112 && (
+          <div className="max-w-[900px] w-full flex gap-4 mx-auto">
+            <Input />
+            <Button className="text-2xl leading-5" onClick={() => setModalState({ open: true })}>
+              +
+            </Button>
+          </div>
+        )}
         <Spin spinning={fetching}>
           {post?.map((post) => {
             return (

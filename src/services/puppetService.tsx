@@ -52,3 +52,19 @@ export const createPlay = (formData: any) => {
 export const deletePlay = (params: { id: string }) => {
   return api.delete('/plays', { params });
 };
+
+export const deleteQuestion = (params: { id: string }) => {
+  return api.delete('/question/delete', { params });
+};
+
+export const updateQuestion = (params: any) => {
+  return api.post('/question/update', params);
+};
+
+export const getQuestions = () => {
+  return api.get('/questions');
+};
+
+export const getUserInfo = () => {
+  return api.get('/user-info');
+};
