@@ -25,6 +25,7 @@ export default function CreatePlay({ open, name, onOk, onCancel, content, image,
   const handleFinished = () => {
     const values = form.getFieldsValue();
     setPlayState({ title: '', content: '' });
+
     if (!values.title || !values.content || !values?.image?.fileList?.[0])
       return message.error('Bạn cần điền đầy đủ các trường!');
 
@@ -49,11 +50,14 @@ export default function CreatePlay({ open, name, onOk, onCancel, content, image,
   };
 
   useEffect(() => {
-    if (name && open) {
+    if (open) {
       form.setFieldsValue({
         title: name,
         content,
       });
+    }
+
+    if (name && open && content)
       setFileList([
         {
           uid: id,
@@ -61,7 +65,6 @@ export default function CreatePlay({ open, name, onOk, onCancel, content, image,
           url: image,
         },
       ]);
-    }
   }, [open]);
 
   const Title = (

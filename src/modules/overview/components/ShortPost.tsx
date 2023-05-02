@@ -7,6 +7,10 @@ import dayjs from 'dayjs';
 import CreatePost from './CreatePost';
 import { useAppSelector } from '@/store/hook';
 
+export function truncate(str, n) {
+  return str.length > n ? `${str.slice(0, n - 1) }&hellip;` : str;
+}
+
 interface IProps {
   // eslint-disable-next-line no-unused-vars
   handleDelete: (id: string) => void;
@@ -18,6 +22,7 @@ interface IProps {
     slug: string;
     _id: string;
     updatedAt: string;
+    number_comment: number;
   };
 }
 
@@ -63,13 +68,14 @@ export default function ShortPost(props: IProps) {
         )}
         <h1 className="text-3xl font-bold text-center leading-10 mb-4">{props.data?.title}</h1>
         <span className="">
-          {dayjs(props.data?.updatedAt).format('DD-MM-YYYY')} - Rối nước tế tiêu - 0 Bình luận
+          {dayjs(props.data?.updatedAt).format('DD-MM-YYYY')} - Rối nước tế tiêu -{' '}
+          {props?.data?.number_comment} Bình luận
         </span>
         <div className="w-[60px]">
           <Divider className="h-[2px]" />
         </div>
-        <p className="text-lg leading-10 text-justify mb-8 max-h-[200px] overflow-hidden">
-          <div dangerouslySetInnerHTML={createMarkUp(props.data?.content)}></div>
+        <p className="text-lg leading-10 text-justify mb-8 max-h-[220px] overflow-hidden">
+          <div dangerouslySetInnerHTML={createMarkUp(truncate(props.data?.content, 500))}></div>
         </p>
         <Button>
           <Link href={`/overview/${props.data?.slug}` || '/'}> Đọc thêm </Link>

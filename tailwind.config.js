@@ -21,6 +21,7 @@ module.exports = {
         'grey-200': '#D6D6D6',
         'grey-100': '#E8E8E8',
         'grey-50': '#F3F3F3',
+        'option-1': '#5582ac'
       },
       gridTemplateColumns: {
         station: '75% 25%',

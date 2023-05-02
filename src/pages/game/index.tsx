@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { setName } from '@/store/user';
 import randomWords from 'random-words';
 import { useRouter } from 'next/router';
-import { Form, Input, Button, Tabs, TabsProps } from 'antd';
+import { Form, Input, Button, Tabs, TabsProps, message } from 'antd';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -10,6 +10,7 @@ const Home = () => {
   // Event Handlers
   const createGameHandler = (values) => {
     const name = values.name;
+    if (!name) return message.error('Bạn cần điền tên người chơi');
     dispatch(setName(name));
     const randomRoomID = randomWords(3).join('-');
     router.push(`/game/room/${randomRoomID}`);
@@ -18,6 +19,8 @@ const Home = () => {
   const joinGameHandler = (values) => {
     const name = values.name;
     const gameID = values.gameID;
+    if (!name || !gameID) return message.error('Bạn cần điền tên người chơi và ID phòng');
+
     dispatch(setName(name));
     router.push(`/game/room/${gameID}`);
   };

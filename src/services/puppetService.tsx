@@ -20,6 +20,10 @@ export const createComment = (params: { content: string; post_id: string }) => {
   return api.post('/overview/comment', params);
 };
 
+export const deleteComment = (params: { id: string }) => {
+  return api.delete('/overview/comment/delete', { params });
+};
+
 export const createQuestion = (params: {
   category: string;
   difficulty: string;
@@ -95,4 +99,8 @@ export const getHistory = () => {
 
 export const getValuation = () => {
   return api.get('/valuation');
+};
+
+export const getPlayDetail = (params) => {
+  return api.get('/plays/detail', { params });
 };

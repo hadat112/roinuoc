@@ -1,28 +1,38 @@
-import { Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react';
+import { Table } from 'antd';
 import { sortWith, descend, ascend, prop } from 'ramda';
-// Sorting Helper
+
 const scoreNameSort = sortWith([descend(prop('score')), ascend(prop('name'))]);
 const LeaderboardTable = ({ data }) => {
   const sortedData = scoreNameSort(data);
+  const userColumns = [
+    {
+      title: 'Hạng',
+      dataIndex: 'rank',
+      key: 'rank',
+      render: (_, _record, index) => {
+        return <span>{index + 1}</span>;
+      },
+    },
+    {
+      title: 'Người chơi',
+      dataIndex: 'player',
+      key: 'player',
+      render: (_, record) => {
+        return <span>{record?.name}</span>;
+      },
+    },
+    {
+      title: 'Điểm số',
+      dataIndex: 'score',
+      key: 'score',
+      render: (_, record) => {
+        return <span>{record?.score}</span>;
+      },
+    },
+  ];
+
   return (
-    <Table variant="simple">
-      <Thead>
-        <Tr>
-          <Th>Rank</Th>
-          <Th>Player</Th>
-          <Th isNumeric>Score</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {sortedData.map((player, index) => (
-          <Tr key={player.id}>
-            <Td>{index + 1}</Td>
-            <Td>{player.name}</Td>
-            <Td isNumeric>{player.score}</Td>
-          </Tr>
-        ))}
-      </Tbody>
-    </Table>
+    <Table columns={userColumns} dataSource={sortedData} rowKey={(record) => record.id} pagination={false} />
   );
 };
 export default LeaderboardTable;

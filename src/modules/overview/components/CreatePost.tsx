@@ -50,7 +50,7 @@ export default function CreatePost({ visible, title, content, onOk, onCancel }: 
   );
 
   useEffect(() => {
-    if (content && visible) {
+    if (visible) {
       form.setFieldsValue({ title, content });
     }
   }, [visible]);

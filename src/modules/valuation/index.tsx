@@ -2,6 +2,7 @@ import { getValuation } from '@/services/puppetService';
 import { useQuery } from '@tanstack/react-query';
 import { Tabs, message } from 'antd';
 import { useState } from 'react';
+import { createMarkUp } from '../overview/components/ShortPost';
 
 export default function Valuation() {
   const [activeKey, setActiveKey] = useState('1');
@@ -27,25 +28,25 @@ export default function Valuation() {
 
   return (
     <>
-      <div className="max-w-[960px] text-left mx-auto text-lg leading-10 my-16 bg-white px-8 py-4">
+      <div className="max-w-[960px] text-left mx-auto text-xl leading-10 my-16 bg-white px-8 py-4">
         <Tabs activeKey={activeKey} onChange={handleChange}>
           <Tabs.TabPane key="1" tab="Lịch sử">
-            <p className="Tabs.TabPane">{data?.lichsu}</p>
+            <div className="Tabs.TabPane" dangerouslySetInnerHTML={createMarkUp(data?.lichsu)}></div>
           </Tabs.TabPane>
           <Tabs.TabPane key="2" tab="Giáo dục" force-render>
-            <p className="Tabs.TabPane">{data?.giaoduc}</p>
+            <div className="Tabs.TabPane" dangerouslySetInnerHTML={createMarkUp(data?.giaoduc)}></div>
           </Tabs.TabPane>
           <Tabs.TabPane key="3" tab="Văn hoá">
-            <p className="Tabs.TabPane">{data?.vanhoa}</p>
+            <div className="Tabs.TabPane" dangerouslySetInnerHTML={createMarkUp(data?.vanhoa)}></div>
           </Tabs.TabPane>
           <Tabs.TabPane key="4" tab="Khoa học">
-            <p className="Tabs.TabPane">{data?.khoahoc}</p>
+            <div className="Tabs.TabPane" dangerouslySetInnerHTML={createMarkUp(data?.khoahoc)}></div>
           </Tabs.TabPane>
           <Tabs.TabPane key="5" tab="Kinh tế, du lịch">
-            <p className="Tabs.TabPane">{data?.kinhte}</p>
+            <div className="Tabs.TabPane" dangerouslySetInnerHTML={createMarkUp(data?.kinhte)}></div>
           </Tabs.TabPane>
           <Tabs.TabPane key="6" tab="Tính cộng đồng">
-            <p className="Tabs.TabPane">{data?.congdong}</p>
+            <div className="Tabs.TabPane" dangerouslySetInnerHTML={createMarkUp(data?.congdong)}></div>
           </Tabs.TabPane>
         </Tabs>
       </div>

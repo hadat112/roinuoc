@@ -1,4 +1,3 @@
-import { Heading } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 const QuestionTransition = ({ questionNo, duration }) => {
   const [timeLeft, setTimeLeft] = useState(duration / 1000);
@@ -10,7 +9,7 @@ const QuestionTransition = ({ questionNo, duration }) => {
       });
     }, 1000);
   }, []);
-  return <Heading size="lg">{`Câu hỏi ${questionNo} bắt đầu sau ${timeLeft} giây`}</Heading>;
+  return <h1 className="text-4xl">{`Câu hỏi ${questionNo} bắt đầu sau ${timeLeft} giây`}</h1>;
 };
 
 export default QuestionTransition;

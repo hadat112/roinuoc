@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { getPost } from '@/services/puppetService';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import { createMarkUp } from '../overview/components/ShortPost';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -114,7 +115,7 @@ export default function Home() {
                             {dayjs(p?.updatedAt).format('DD-MM-YYYY MM[h]HH')}
                           </p>
                           <p className="text-sm text-justify max-h-[66px] overflow-clip leading-6">
-                            {p?.content}
+                            <div dangerouslySetInnerHTML={createMarkUp(p?.content)}></div>
                           </p>
                           <Link
                             href={`overview/${p?.slug}`}

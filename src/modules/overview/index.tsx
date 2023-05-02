@@ -11,6 +11,7 @@ export default function Overview() {
   const [post, setPost] = useState<any>();
   const [fetching, setFetching] = useState(false);
   const { role } = useAppSelector((state) => state.auth);
+  const [title, setTitle] = useState('');
 
   function removeAccents(str) {
     if (!str) return;
@@ -28,7 +29,7 @@ export default function Overview() {
       type: 'overview',
     };
     const result: any = await createPost(dataForm);
-
+    setTitle('');
     if (result.error) {
       setModalState({ open: false });
       return message.error(result.error);
@@ -78,6 +79,7 @@ export default function Overview() {
     setFetching(false);
 
     if (response.error) return message.error(response.error);
+
     setPost(response.data);
   };
 
@@ -96,6 +98,10 @@ export default function Overview() {
     setPost(result.data);
   };
 
+  const handleChanged = (e) => {
+    setTitle(e.target.value);
+  };
+
   useEffect(() => {
     getPostList();
   }, []);
@@ -105,13 +111,13 @@ export default function Overview() {
       <div className="flex flex-col flex-1 w-full p-4">
         {role === 112 && (
           <div className="max-w-[900px] w-full flex gap-4 mx-auto">
-            <Input />
+            <Input onChange={handleChanged} />
             <Button className="text-2xl leading-5" onClick={() => setModalState({ open: true })}>
               +
             </Button>
           </div>
         )}
-        <Spin spinning={fetching}>
+        <Spin className="mt-12" spinning={fetching}>
           {post?.map((post) => {
             return (
               <div key={post?._id} className="w-full flex-1">
@@ -124,6 +130,7 @@ export default function Overview() {
           onOk={handleSubmit}
           onCancel={() => setModalState({ open: false })}
           visible={modalState.open}
+          title={title}
         />
       </div>
       <Sider className="" onSearch={handleSearch} />

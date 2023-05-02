@@ -1,4 +1,3 @@
-import { Center, VStack, Spinner } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import GameView from '@/components/GameView/index';
@@ -6,8 +5,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { setSocketID } from '@/store/user';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
-import { Tooltip, Badge, Button } from 'antd';
-
+import { Tooltip, Badge, Button, Spin } from 'antd';
 const ENDPOINT = 'http://localhost:4001';
 
 let socket;
@@ -84,8 +82,8 @@ const GameRoom = () => {
   };
 
   return (
-    <Center bg="#151515" minH="100vh">
-      <VStack spacing="1rem" color="white">
+    <div className="min-h-[100vh] bg-[#151515] w-full flex ">
+      <div className="text-white  max-w-[60%] m-auto flex flex-col items-center">
         <h1 className="text-text-game text-3xl">Phòng chơi</h1>
         <p>
           Game ID:{' '}
@@ -106,9 +104,7 @@ const GameRoom = () => {
             <span />
           </Tooltip>
         </p>
-        {!isSocketJoined && (
-          <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
-        )}
+        {!isSocketJoined && <Spin />}
         {isSocketJoined && (
           <>
             <p>Người chơi trong phòng:</p>
@@ -150,8 +146,8 @@ const GameRoom = () => {
             )}
           </>
         )}
-      </VStack>
-    </Center>
+      </div>
+    </div>
   );
 };
 export default GameRoom;

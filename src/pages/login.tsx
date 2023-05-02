@@ -2,7 +2,7 @@ import { login, register } from '@/services/auth';
 import { getUserInfo } from '@/services/puppetService';
 import { setUserName } from '@/store/auth';
 import { useAppDispatch } from '@/store/hook';
-import { Input, Button, Checkbox, Form, message } from 'antd';
+import { Input, Button, Form, message } from 'antd';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -36,7 +36,7 @@ export default function Login() {
     }
     getAuth();
 
-    router.push('/');
+    router.push('/home');
   };
 
   return (
@@ -64,7 +64,6 @@ export default function Login() {
               >
                 <Input type="password" placeholder="Password" className="h-[44px]" />
               </Form.Item>
-              {type ? <a className="text-sm self-end">Quên mật khẩu?</a> : null}
             </div>
             {!type ? (
               <div className="flex flex-col items-start gap-y-1 text-xl font-semibold">
@@ -86,11 +85,6 @@ export default function Login() {
                 >
                   <Input type="password" placeholder="Password" className="h-[44px]" />
                 </Form.Item>
-              </div>
-            ) : null}
-            {type ? (
-              <div className="w-full flex justify-start gap-2">
-                <Checkbox></Checkbox> Ghi nhớ mật khẩu
               </div>
             ) : null}
             {type ? (

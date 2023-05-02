@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { setUserName } from '@/store/auth';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { getUserInfo } from '@/services/puppetService';
+import { UserOutlined } from '@ant-design/icons';
 
 export default function RightHeader() {
   const items: MenuProps['items'] = [
@@ -71,7 +72,7 @@ export default function RightHeader() {
           }}
         >
           <div className="flex items-center gap-x-3 hover:cursor-pointer py-2">
-            <Avatar alt="avatar" size="large" />
+            <Avatar icon={<UserOutlined />} alt="avatar" size="large" />
             <div className="flex flex-col justify-center">
               <p className="text-sm text-yellow mb-0">{username}</p>
             </div>
