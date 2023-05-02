@@ -1,7 +1,7 @@
 import ApiClient from '@/configs/ApiClient';
 import { message } from 'antd';
 
-const AUTH_API = process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH;
+const AUTH_API = `${process.env.NEXT_PUBLIC_DEVELOPMENT_PUPPET}/auth`;
 const api = new ApiClient(AUTH_API).getInstance();
 
 export const getTokenId = () => {

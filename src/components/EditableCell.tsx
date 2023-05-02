@@ -1,5 +1,5 @@
 import { Form, Input, Select } from 'antd';
-const OPTIONS = [
+const DIFF_OPTIONS = [
   {
     value: 'hard',
     label: 'Khó',
@@ -11,6 +11,17 @@ const OPTIONS = [
   {
     value: 'easy',
     label: 'Dễ',
+  },
+];
+
+const ROLE_OPTIONS = [
+  {
+    value: 112,
+    label: 'admin',
+  },
+  {
+    value: 212,
+    label: 'user',
   },
 ];
 
@@ -29,7 +40,24 @@ const EditableCell: React.FC<any> = ({ editing, dataIndex, title, children, ...r
             },
           ]}
         >
-          <Select options={OPTIONS} />
+          <Select options={DIFF_OPTIONS} />
+        </Form.Item>
+      </td>
+    );
+
+  if (dataIndex === 'role')
+    return (
+      <td {...restProps}>
+        <Form.Item
+          name={dataIndex}
+          rules={[
+            {
+              required: true,
+              message: `Please Input ${title}!`,
+            },
+          ]}
+        >
+          <Select options={ROLE_OPTIONS} />
         </Form.Item>
       </td>
     );

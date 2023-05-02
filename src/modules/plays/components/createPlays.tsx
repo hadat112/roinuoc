@@ -1,28 +1,68 @@
 import { UploadOutlined } from '@ant-design/icons';
 import { Modal, Button, Input, Form, Upload, message } from 'antd';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { QuillEditor as DEditor } from "@vueup/vue-quill";
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 
 interface IProps {
   open?: boolean;
-  title?: string;
+  name: string;
+  content: string;
+  id?: string;
+  image: string;
+  type?: string;
   // eslint-disable-next-line no-unused-vars
-  onOk?: (params: { name?: string; content?: string; image: any }) => void;
+  onOk?: (params: { name: string; content: string; image: any; id?: string }) => void;
   onCancel?: () => void;
 }
 
-export default function CreatePlay({ open, title, onOk, onCancel }: IProps) {
+export default function CreatePlay({ open, name, onOk, onCancel, content, image, id }: IProps) {
   const [playState, setPlayState] = useState<{ title: string; content: string }>();
+  const [fileList, setFileList] = useState([]);
   const [form] = Form.useForm();
   const handleFinished = () => {
     const values = form.getFieldsValue();
     setPlayState({ title: '', content: '' });
-    if (!values.title || !values.content) return message.error('Bạn cần điền đầy đủ các trường!');
-    onOk({ name: values.title, content: values.content, image: values?.image?.file?.originFileObj });
+    if (!values.title || !values.content || !values?.image?.fileList?.[0])
+      return message.error('Bạn cần điền đầy đủ các trường!');
+
+    onOk({
+      id,
+      name: values.title,
+      content: values.content,
+      image: values?.image?.fileList?.[0]?.originFileObj,
+    });
+    form.resetFields();
+    setFileList([]);
   };
+
+  const handleCancel = () => {
+    onCancel();
+    form.resetFields();
+    setFileList([]);
+  };
+
+  const handleChangeFile = ({ fileList }) => {
+    setFileList(fileList);
+  };
+
+  useEffect(() => {
+    if (name && open) {
+      form.setFieldsValue({
+        title: name,
+        content,
+      });
+      setFileList([
+        {
+          uid: id,
+          name: `${id}.png`,
+          url: image,
+        },
+      ]);
+    }
+  }, [open]);
 
   const Title = (
     <div className="relative flex items-center py-2">
@@ -41,13 +81,20 @@ export default function CreatePlay({ open, title, onOk, onCancel }: IProps) {
   );
 
   return (
-    <Modal open={open} onCancel={onCancel} className="modal-web" width="720" title={Title} footer={Footer}>
+    <Modal
+      open={open}
+      onCancel={handleCancel}
+      className="modal-web"
+      width="720"
+      title={Title}
+      footer={Footer}
+    >
       <Form form={form}>
         <Form.Item name="title">
-          <Input defaultValue={title} value={playState?.title} className="mb-6" placeholder="Title" />
+          <Input value={playState?.title} className="mb-6" placeholder="Title" />
         </Form.Item>
         <Form.Item label="Ảnh bìa" name="image">
-          <Upload className="mb-6">
+          <Upload maxCount={1} onChange={handleChangeFile} fileList={fileList} className="mb-6">
             <Button icon={<UploadOutlined />}>Upload</Button>
           </Upload>
         </Form.Item>

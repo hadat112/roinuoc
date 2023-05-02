@@ -49,8 +49,16 @@ export const createPlay = (formData: any) => {
   });
 };
 
+export const updatePlay = (formData: any) => {
+  return api.post('/plays/update', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
+
 export const deletePlay = (params: { id: string }) => {
-  return api.delete('/plays', { params });
+  return api.delete('/plays/delete', { params });
 };
 
 export const deleteQuestion = (params: { id: string }) => {
@@ -65,6 +73,26 @@ export const getQuestions = () => {
   return api.get('/questions');
 };
 
+export const getUsers = () => {
+  return api.get('/users');
+};
+
+export const updateUser = (params: any) => {
+  return api.post('/user/update', params);
+};
+
+export const deleteUser = (params: { id: string }) => {
+  return api.delete('/user/delete', { params });
+};
+
 export const getUserInfo = () => {
   return api.get('/user-info');
+};
+
+export const getHistory = () => {
+  return api.get('/history');
+};
+
+export const getValuation = () => {
+  return api.get('/valuation');
 };

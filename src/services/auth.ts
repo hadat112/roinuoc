@@ -1,6 +1,6 @@
 import ApiClient from '@/configs/ApiClient';
 
-const END_POINT = `${process.env.NEXT_PUBLIC_DEVELOPMENT_AUTH}`;
+const END_POINT = `${process.env.NEXT_PUBLIC_DEVELOPMENT_PUPPET}/auth`;
 
 const api = new ApiClient(END_POINT).getInstance();
 

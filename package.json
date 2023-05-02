@@ -8,6 +8,7 @@
     "build": "cross-env NODE_ENV=production next build",
     "build:test": "cross-env NODE_ENV=test next build",
     "start": "next start",
+    "vercel-build": "npm run prepare && next build",
     "lint": "next lint",
     "types-check": "tsc --pretty --noEmit",
     "lint:prettier": "prettier --check \"src/**/*+(js|jsx|ts|tsx|scss)\"",
