@@ -1,4 +1,3 @@
-import { Heading, HStack } from '@chakra-ui/react';
 import Option from '../Question/Option';
 import QuestionTransition from '../Question/QuestionTransition';
 import { parseEntities } from '../Question/Option';
@@ -39,27 +38,25 @@ const GameView = ({ selectedAnswer, selectOption, gameState, leaderboard }) => {
       {questionRoundStatus === 'started' && (
         <>
           <Timer duration={gameState.duration} />
-          <Heading>Câu {gameState.currentQuestionNo}</Heading>
-          <Heading>{parseEntities(gameState.questions[gameState.currentQuestionNo - 1].payload)}</Heading>
-          <HStack spacing="1rem">
-            {gameState.questions[gameState.currentQuestionNo - 1].options.map((option, index) => (
-              <Option
-                key={option.id}
-                index={index}
-                content={option.payload}
-                onClickHandler={() => {
-                  // if (selectedAnswer !== null) return;
-                  selectOption({ answerID: option.id });
-                }}
-                isSelected={option.id === selectedAnswer}
-              />
-            ))}
-          </HStack>
+          <h1>Câu {gameState.currentQuestionNo}</h1>
+          <h1>{parseEntities(gameState.questions[gameState.currentQuestionNo - 1].payload)}</h1>
+          {gameState.questions[gameState.currentQuestionNo - 1].options.map((option, index) => (
+            <Option
+              key={option.id}
+              index={index}
+              content={option.payload}
+              onClickHandler={() => {
+                // if (selectedAnswer !== null) return;
+                selectOption({ answerID: option.id });
+              }}
+              isSelected={option.id === selectedAnswer}
+            />
+          ))}
         </>
       )}
       {questionRoundStatus === 'ended' && (
         <div>
-          <Heading size="md">
+          <h1>
             Câu trả lời của bạn:{' '}
             {gameState.currentQuestionNo <= gameState.questions.length &&
               parseEntities(
@@ -71,8 +68,8 @@ const GameView = ({ selectedAnswer, selectOption, gameState, leaderboard }) => {
                   gameState.questions
                 )
               )}
-          </Heading>
-          <Heading size="md" mb="1rem">
+          </h1>
+          <h1>
             Câu trả lời đúng:{' '}
             {gameState.currentQuestionNo <= gameState.questions.length &&
               parseEntities(
@@ -80,10 +77,8 @@ const GameView = ({ selectedAnswer, selectOption, gameState, leaderboard }) => {
                   (option) => option.id === gameState.questions[gameState.currentQuestionNo - 1].answerID
                 ).payload
               )}
-          </Heading>
-          <Heading size="sm" textAlign="center">
-            Leaderboard
-          </Heading>
+          </h1>
+          <h1>Leaderboard</h1>
           <LeaderboardTable data={leaderboard} />
         </div>
       )}
